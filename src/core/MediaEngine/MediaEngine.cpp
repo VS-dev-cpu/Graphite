@@ -39,7 +39,9 @@ namespace GameEngine::MEDIA
         // Push Render Queue
         drawable = true;
         while (drawable)
-            ;
+            if (!running)
+                return;
+
         renderQueue.clear();
 
         // TODO: Check if renderthread stopped
@@ -134,7 +136,9 @@ namespace GameEngine::MEDIA
         {
             // Get Render Queue
             while (!engine->drawable)
-                ;
+                if (!engine->running)
+                    return 0;
+
             auto tasks = engine->renderQueue;
             engine->drawable = false;
             // TODO: Check if Engine Stopped
