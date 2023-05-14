@@ -17,78 +17,76 @@ namespace GameEngine::MEDIA::RENDERER
             return;
         }
 
-        // Load Built-in 2D Shader
-        const char *vertex =
-            "#version 300 es\n "
-            "layout(location = 0) in vec2 aPos;\n"
-            "layout(location = 1) in vec2 aTexCoord;\n"
-            "out vec2 TexCoord;\n"
-            "out vec2 FragPos;\n"
-            "uniform vec2 center;\n"
-            "uniform vec2 size;\n"
-            "uniform float rotation;\n"
-            "uniform vec2 ratio;\n"
-            "void main()\n"
-            "{\n"
-            "    float rads = radians(-rotation);\n"
-            "    vec2 point = vec2(size.x * aPos.x, size.y * aPos.y);\n"
-            "    float x = cos(rads) * (point.x) - sin(rads) * (point.y) + center.x;\n"
-            "    float y = sin(rads) * (point.x) + cos(rads) * (point.y) + center.y;\n"
-            "    x *= ratio.x;\n"
-            "    y *= ratio.y;\n"
-            "    TexCoord = aTexCoord;\n"
-            "    FragPos = vec2(aPos.x, aPos.y);\n"
-            "    gl_Position = vec4(x, y, 0.0, 1.0);\n"
-            "}\n";
+        shader s;
+        s.vertex = "#version 300 es\n "
+                   "layout(location = 0) in vec2 aPos;\n"
+                   "layout(location = 1) in vec2 aTexCoord;\n"
+                   "out vec2 TexCoord;\n"
+                   "out vec2 FragPos;\n"
+                   "uniform vec2 center;\n"
+                   "uniform vec2 size;\n"
+                   "uniform float rotation;\n"
+                   "uniform vec2 ratio;\n"
+                   "void main()\n"
+                   "{\n"
+                   "    float rads = radians(-rotation);\n"
+                   "    vec2 point = vec2(size.x * aPos.x, size.y * aPos.y);\n"
+                   "    float x = cos(rads) * (point.x) - sin(rads) * (point.y) + center.x;\n"
+                   "    float y = sin(rads) * (point.x) + cos(rads) * (point.y) + center.y;\n"
+                   "    x *= ratio.x;\n"
+                   "    y *= ratio.y;\n"
+                   "    TexCoord = aTexCoord;\n"
+                   "    FragPos = vec2(aPos.x, aPos.y);\n"
+                   "    gl_Position = vec4(x, y, 0.0, 1.0);\n"
+                   "}\n";
 
-        const char *fragment =
-            "#version 300 es\n"
-            "precision mediump float;\n"
-            "out vec4 FragColor;\n"
-            "in vec2 TexCoord;\n"
-            "in vec2 FragPos;\n"
-            "uniform int type;\n"
-            "uniform sampler2D tex;\n"
-            "uniform vec3 color;\n"
-            "uniform float cutradius;\n"
-            "void main()\n"
-            "{\n"
-            "    switch (type)\n"
-            "    {\n"
-            "    case 0:\n"
-            "        // Color\n"
-            "        FragColor = vec4(color.rgb, 1.0);\n"
-            "        break;\n"
-            "    case 1:\n"
-            "        // Texture\n"
-            "        FragColor = texture(tex, TexCoord);\n"
-            "        break;\n"
-            "    case 2:\n"
-            "        // Text\n"
-            "        FragColor = vec4(color.rgb, length(texture(tex, TexCoord).rgb));\n"
-            "        break;\n"
-            "    case 3:\n"
-            "        // Circle\n"
-            "        vec2 val = FragPos;\n"
-            "        float R = 1.0f;\n"
-            "        float R2 = cutradius;\n"
-            "        float dist = sqrt(dot(val, val));\n"
-            "        //if (dist >= R || dist <= R2)\n"
-            "            \n"
-            "        float sm = smoothstep(R, R - 0.01, dist);\n"
-            "        float sm2 = smoothstep(R2, R2 + 0.01, dist);\n"
-            "        float alpha = sm * sm2;\n"
-            "        FragColor = vec4(color.xyz, 1.0);\n"
-            "        break;\n"
-            "    default:\n"
-            "        FragColor = vec4(color.xyz, 0.0);\n"
-            "        break;\n"
-            "    }\n"
-            "}";
+        s.fragment = "#version 300 es\n"
+                     "precision mediump float;\n"
+                     "out vec4 FragColor;\n"
+                     "in vec2 TexCoord;\n"
+                     "in vec2 FragPos;\n"
+                     "uniform int type;\n"
+                     "uniform sampler2D tex;\n"
+                     "uniform vec3 color;\n"
+                     "uniform float cutradius;\n"
+                     "void main()\n"
+                     "{\n"
+                     "    switch (type)\n"
+                     "    {\n"
+                     "    case 0:\n"
+                     "        // Color\n"
+                     "        FragColor = vec4(color.rgb, 1.0);\n"
+                     "        break;\n"
+                     "    case 1:\n"
+                     "        // Texture\n"
+                     "        FragColor = texture(tex, TexCoord);\n"
+                     "        break;\n"
+                     "    case 2:\n"
+                     "        // Text\n"
+                     "        FragColor = vec4(color.rgb, length(texture(tex, TexCoord).rgb));\n"
+                     "        break;\n"
+                     "    case 3:\n"
+                     "        // Circle\n"
+                     "        vec2 val = FragPos;\n"
+                     "        float R = 1.0f;\n"
+                     "        float R2 = cutradius;\n"
+                     "        float dist = sqrt(dot(val, val));\n"
+                     "        //if (dist >= R || dist <= R2)\n"
+                     "            \n"
+                     "        float sm = smoothstep(R, R - 0.01, dist);\n"
+                     "        float sm2 = smoothstep(R2, R2 + 0.01, dist);\n"
+                     "        float alpha = sm * sm2;\n"
+                     "        FragColor = vec4(color.xyz, 1.0);\n"
+                     "        break;\n"
+                     "    default:\n"
+                     "        FragColor = vec4(color.xyz, 0.0);\n"
+                     "        break;\n"
+                     "    }\n"
+                     "}";
 
         // Failed to Init Shader
-        if (add("__builtin_shader_2d", vertex, fragment, nullptr) != "__builtin_shader_2d")
-            ok = false;
+        if (add("__builtin_shader_2d", s) == "")
+            LOG::ERROR("OpenGL", "Failed to load 2D Shader");
     }
 
     OpenGL::~OpenGL()
@@ -109,8 +107,12 @@ namespace GameEngine::MEDIA::RENDERER
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | buffers);
     }
 
-    std::string OpenGL::add(std::string name, const char *vertex, const char *fragment, const char *geometry)
+    std::string OpenGL::add(std::string name, shader s)
     {
+        const char *vertex = s.vertex.c_str();
+        const char *fragment = s.fragment.c_str();
+        const char *geometry = s.geometry.c_str();
+
         // Compile & Load Shader
         uint vert, frag, geo, id;
         bool isGeo = geometry != nullptr;
@@ -194,7 +196,14 @@ namespace GameEngine::MEDIA::RENDERER
         }
 
         LOG::SYSTEM("OpenGL", "Loaded Shader (%s)", name.c_str());
-        shaders[name] = id;
+        shaders[name] = std::pair<shader, uint>(s, id);
+        return name;
+    }
+
+    std::string OpenGL::add(std::string name, texture t)
+    {
+        LOG::SYSTEM("OpenGL", "Loaded Texture (%s)", name.c_str());
+        textures[name] = std::pair<texture, uint>(t, 0);
         return name;
     }
 }

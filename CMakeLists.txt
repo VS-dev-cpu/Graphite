@@ -10,6 +10,7 @@ add_library(GameEngine
 
     # -- Core --
     src/core/log.cpp
+    src/core/load.cpp
 
     # / MediaEngine
     src/core/MediaEngine/MediaEngine.cpp
@@ -24,7 +25,6 @@ add_library(GameEngine
     src/core/PhysicsEngine/PhysicsEngine.cpp
 
     # -- Utility --
-    src/utility/stb_image.cpp
     src/utility/glad.c
     )
 

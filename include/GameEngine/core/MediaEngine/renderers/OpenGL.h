@@ -21,8 +21,8 @@ namespace GameEngine::MEDIA::RENDERER
         bool update();
         void clear(float r = 0.0f, float g = 0.0f, float b = 0.0f, uint buffers = 0x00);
 
-        // Adds
-        std::string add(std::string name, const char *vertex, const char *fragment, const char *geometry = "");
+        std::string add(std::string name, shader s);
+        std::string add(std::string name, texture tex);
 
     private:
         WINDOWER::GLFW *windower = nullptr;
@@ -31,6 +31,9 @@ namespace GameEngine::MEDIA::RENDERER
         uint VAO, VBO, EBO;
 
         // Shaders
-        std::map<std::string, uint> shaders;
+        std::map<std::string, std::pair<shader, uint>> shaders;
+
+        // Textures
+        std::map<std::string, std::pair<texture, uint>> textures;
     };
 }
