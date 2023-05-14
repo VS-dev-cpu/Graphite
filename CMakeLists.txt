@@ -11,10 +11,16 @@ add_library(GameEngine
     # -- Core --
     src/core/log.cpp
 
-    # Core > MediaEngine
+    # / MediaEngine
     src/core/MediaEngine/MediaEngine.cpp
+
+    # > / windowers
+    src/core/MediaEngine/windowers/glfw.cpp
+
+    # > / renderers
+    src/core/MediaEngine/renderers/OpenGL.cpp
     
-    # Core > PhysicsEngine
+    # / PhysicsEngine
     src/core/PhysicsEngine/PhysicsEngine.cpp
 
     # -- Utility --

@@ -1,42 +1,21 @@
 #pragma once
 
-#include <GameEngine/utility/log.h>
+#include <GameEngine/core/log.h>
 
-#include <GameEngine/utility/glad.h>
 #include <GLFW/glfw3.h>
-
-// Detect OS
-#if defined(__linux)
-#define __pc
-#elif defined(__WIN32)
-#define __window
-#define __pc
-
-#undef ERROR
-#undef near
-#undef far
-#elif defined(__EMSCRIPTEN__)
-#define __browser
-#include <emscripten.h>
-#include <emscripten/html5.h>
-#else
-// #define __mobile
-// #define __macos
-#warning Targeted OS is not recognized
-#endif
 
 #include <string>
 #include <map>
 #include <set>
 
-namespace GameEngine
+namespace GameEngine::MEDIA::WINDOWER
 {
-    // OpenGL Window (& Input) Manager
-    class Window
+    // GLFW Windowing Library
+    class GLFW
     {
     public:
-        Window(std::string name = "GameEngine::Window", bool fullscreen = true, int width = 720, int height = 480);
-        ~Window();
+        GLFW(std::string name = "GameEngine::Window", bool fullscreen = true, int width = 720, int height = 480);
+        ~GLFW();
 
         bool update();
 
@@ -75,15 +54,13 @@ namespace GameEngine
         // Cursor & Scroll Positions
         double cursor[2], scroll[2];
 
-    protected:
         // Window Size
         int width, height;
 
-    private:
         GLFWwindow *window = nullptr;
-        GLFWmonitor *monitor = nullptr;
 
-        bool shouldResize = true;
+    private:
+        GLFWmonitor *monitor = nullptr;
 
         // Window Position & Size
         int windowPos[2];
@@ -95,14 +72,15 @@ namespace GameEngine
         // FrameBuffer Size Callback
         static void callback_resize(GLFWwindow *window, int w, int h)
         {
-            Window *self = (Window *)glfwGetWindowUserPointer(window);
-            self->shouldResize = true;
+            GLFW *self = (GLFW *)glfwGetWindowUserPointer(window);
+            self->width = w;
+            self->height = h;
         }
 
         // Keyboard State Callback
         static void callback_key(GLFWwindow *window, int key, int scancode, int action, int mods)
         {
-            Window *self = (Window *)glfwGetWindowUserPointer(window);
+            GLFW *self = (GLFW *)glfwGetWindowUserPointer(window);
 
             if (action == GLFW_PRESS)
                 self->keyboard.insert(scancode);
@@ -113,7 +91,7 @@ namespace GameEngine
         // Cursor Movement Callback
         static void callback_cursor(GLFWwindow *window, double x, double y)
         {
-            Window *self = (Window *)glfwGetWindowUserPointer(window);
+            GLFW *self = (GLFW *)glfwGetWindowUserPointer(window);
 
             self->cursor[0] = (x * 2.0) / (double)self->width - 1.0;
             self->cursor[1] = (y * -2.0) / (double)self->height + 1.0;
@@ -122,7 +100,7 @@ namespace GameEngine
         // Scroll Movement Callback
         static void callback_scroll(GLFWwindow *window, double x, double y)
         {
-            Window *self = (Window *)glfwGetWindowUserPointer(window);
+            GLFW *self = (GLFW *)glfwGetWindowUserPointer(window);
 
             self->scroll[0] = x;
             self->scroll[1] = y;
