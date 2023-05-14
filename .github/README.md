@@ -1,14 +1,3 @@
-# Current State
-This version of the game engine is VERY OUTDATED
-
-The whole project structure has been changed, and i'm still in the progress of making it usable to upload here
-
-I'm also working on a few example codes that can help you understand the engine
-
-I still need around a month to finish these changes, but the first ALPHA release is coming closer!
-
-Thanks for checking out this project, really appreciate it! Best wishes, Sam :)
-
 # Game-Engine
 ## Pre-Alpha Version
 
