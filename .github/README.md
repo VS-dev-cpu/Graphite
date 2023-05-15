@@ -5,7 +5,10 @@
 
 This Game-Engine will be a more code-oriented Engine than others, like [Unity](https://unity.com/), [Unreal](https://www.unrealengine.com/en-US) or [Godot](https://godotengine.org/)
 
-It will also be more like a C++ Library, but at some point, it will have a GUI as well
+It will be like Bevy to Rust,
+it will be a Game Engine library for C++.
+
+At some point, it will have a GUI as well
 
 I'm planning on optimizing it for mainly indie games; it will have medium-graphics and somewhat fast performance
 
