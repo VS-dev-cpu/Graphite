@@ -3,7 +3,7 @@
 namespace GameEngine
 {
     // Initialize Engine
-    GameEngine::GameEngine(std::string name, bool fullscreen, int width, int height) : me(name, fullscreen, width, height)
+    GameEngine::GameEngine(std::string name, bool fullscreen, int width, int height) : me(MEDIA::OPENGL, name, fullscreen, width, height)
     {
         LOG::SYSTEM("GameEngine", "Initialized");
     }

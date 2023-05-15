@@ -2,7 +2,7 @@
 
 namespace GameEngine::MEDIA
 {
-    MediaEngine::MediaEngine(std::string name, bool fullscreen, int width, int height) : name(name), fullscreen(fullscreen), width(width), height(height)
+    MediaEngine::MediaEngine(GRAPHICS_API api, std::string name, bool fullscreen, int width, int height) : api(api), name(name), fullscreen(fullscreen), width(width), height(height)
     {
         // Try to create Mixer Thread
         int err = pthread_create(&mixerThread, nullptr, &mix, this);
@@ -43,8 +43,6 @@ namespace GameEngine::MEDIA
                 return;
 
         renderQueue.clear();
-
-        // TODO: Check if renderthread stopped
     }
 
     void MediaEngine::exit()
@@ -130,16 +128,29 @@ namespace GameEngine::MEDIA
                 return nullptr;
             }
 
-        // TODO: Check if Engine Stopped
+        // Initialize Windower
+        Windower *windower = new WINDOWER::GLFW;
+        if (!windower->init(engine->api, engine->name, engine->fullscreen, engine->width, engine->height))
+            LOG::ERROR("MediaEngine", "Failed to init Windower");
 
         // Initialize Renderer
         Renderer *renderer;
 
-        if (true)
-            renderer = new RENDERER::OpenGL(engine->name, engine->fullscreen, engine->width, engine->height);
+        switch (engine->api)
+        {
+        default:
+            LOG::WARNING("MediaEngine::RenderThread", "Unknown Renderer");
+        case OPENGL:
+            renderer = new RENDERER::OpenGL;
+            break;
+        }
 
-        if (!renderer->ok)
-            LOG::ERROR("RenderThread", "Failed to start Renderer");
+        renderer->init(windower);
+
+        if (!renderer->isInit)
+            LOG::ERROR("MediaEngine::RenderThread", "Failed to init Renderer");
+
+        // TODO: Fix RenderThread freezing up
 
         // Main Render Loop
         while (engine->running)
@@ -151,7 +162,6 @@ namespace GameEngine::MEDIA
 
             auto tasks = engine->renderQueue;
             engine->drawable = false;
-            // TODO: Check if Engine Stopped
 
             // Draw Render Queue (content)
             for (auto [action, data] : tasks)
@@ -233,8 +243,7 @@ namespace GameEngine::MEDIA
                 engine->running = false;
         }
 
-        delete renderer;
-        renderer = nullptr;
+        renderer->clean();
 
         // exit thread
         pthread_exit(nullptr);

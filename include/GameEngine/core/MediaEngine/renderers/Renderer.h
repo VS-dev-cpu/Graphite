@@ -3,13 +3,19 @@
 #include <GameEngine/core/log.h>
 #include <GameEngine/types/base.h>
 
+#include <GameEngine/core/MediaEngine/windowers/Windower.h>
+
 #include <string>
 
 namespace GameEngine::MEDIA
 {
-    class Renderer
+    // Base Renderer Struct
+    struct Renderer
     {
-    public:
+        // Initialize Renderer
+        virtual bool init(Windower *wnd) { return false; }
+        virtual bool clean() { return false; }
+
         virtual bool update() { return false; }
         virtual void clear(float r = 0.0f, float g = 0.0f, float b = 0.0f) {}
 
@@ -19,7 +25,7 @@ namespace GameEngine::MEDIA
         virtual void free_shader(std::string name) {}
         virtual void free_texture(std::string name) {}
 
-    public:
-        bool ok = true;
+        // Is Library Init ?
+        bool isInit = false;
     };
 }

@@ -1,7 +1,12 @@
 #pragma once
 
-#include <GameEngine/core/log.h>
+#include <GameEngine/core/MediaEngine/windowers/Windower.h>
 
+// Include Renderers
+#include <GameEngine/utility/glad.h>
+#define GLFW_INCLUDE_VULKAN
+
+// Include Windowing Library
 #include <GLFW/glfw3.h>
 
 #include <string>
@@ -11,64 +16,27 @@
 namespace GameEngine::MEDIA::WINDOWER
 {
     // GLFW Windowing Library
-    class GLFW
+    struct GLFW : Windower
     {
-    public:
-        GLFW(std::string name = "GameEngine::Window", bool fullscreen = true, int width = 720, int height = 480);
-        ~GLFW();
+        // Initialize GLFW
+        bool init(GRAPHICS_API api = OPENGL, std::string name = "GLFW Window", bool fullscreen = true, int width = 1920, int height = 1080);
 
+        // Destroy Window
+        bool clean();
+
+        // Update Window
         bool update();
 
-        bool isFullscreen() { return glfwGetWindowMonitor(window) != nullptr; };
-        bool setFullscreen(bool fullscreen);
-        void setTitle(std::string title) { glfwSetWindowTitle(window, title.c_str()); };
-        void setIcon(int n, GLFWimage *icon) { glfwSetWindowIcon(window, n, icon); };
-
-        void setVSync(int en) { glfwSwapInterval(en); };
-
-        void maximize() { glfwMaximizeWindow(window); };
-        void minimize() { glfwIconifyWindow(window); };
-        void restore() { glfwRestoreWindow(window); };
-
-        void show() { glfwShowWindow(window); };
-        void hide() { glfwHideWindow(window); };
-
-        void focus() { glfwFocusWindow(window); };
-        void transparent(bool en = false) { glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, en); };
-        void opacity(float value = 1.0f) { glfwSetWindowOpacity(window, value); };
-        void resizeable(bool en = true) { glfwSetWindowAttrib(window, GLFW_RESIZABLE, en); };
-        void decorated(bool en = true) { glfwSetWindowAttrib(window, GLFW_DECORATED, en); };
-        void autoMinimize(bool en = false) { glfwSetWindowAttrib(window, GLFW_AUTO_ICONIFY, en); };
-        void alwaysOnTop(bool en = false) { glfwSetWindowAttrib(window, GLFW_FLOATING, en); };
-        void focusOnShow(bool en = false) { glfwSetWindowAttrib(window, GLFW_FOCUS_ON_SHOW, en); };
-
-        void hideCursor(bool en = true) { glfwSetInputMode(window, GLFW_CURSOR, en ? GLFW_CURSOR_HIDDEN : GLFW_CURSOR_NORMAL); };
-
-        void close(bool sure = true) { glfwSetWindowShouldClose(window, sure); };
-
+        // Get Keyboard State
         bool key(std::string k);
-
-    public:
-        bool ok = true;
-
-        // Cursor & Scroll Positions
-        double cursor[2], scroll[2];
-
-        // Window Size
-        int width, height;
-
-        GLFWwindow *window = nullptr;
-
-    private:
-        GLFWmonitor *monitor = nullptr;
-
-        // Window Position & Size
-        int windowPos[2];
 
         // Keyboard State
         std::set<int> keyboard;
 
-    private:
+        // Window
+        GLFWwindow *window = nullptr;
+        GLFWmonitor *monitor = nullptr;
+
         // FrameBuffer Size Callback
         static void callback_resize(GLFWwindow *window, int w, int h)
         {
@@ -93,8 +61,8 @@ namespace GameEngine::MEDIA::WINDOWER
         {
             GLFW *self = (GLFW *)glfwGetWindowUserPointer(window);
 
-            self->cursor[0] = (x * 2.0) / (double)self->width - 1.0;
-            self->cursor[1] = (y * -2.0) / (double)self->height + 1.0;
+            self->mouse.x = (x * 2.0f) / (float)self->width - 1.0f;
+            self->mouse.y = (y * -2.0f) / (float)self->height + 1.0f;
         }
 
         // Scroll Movement Callback
@@ -102,8 +70,8 @@ namespace GameEngine::MEDIA::WINDOWER
         {
             GLFW *self = (GLFW *)glfwGetWindowUserPointer(window);
 
-            self->scroll[0] = x;
-            self->scroll[1] = y;
+            self->scroll.x = x;
+            self->scroll.y = y;
         }
     };
 }

@@ -6,48 +6,75 @@ std::map<std::string, int> GLFW_STRING_SCANCODE = {
 
 namespace GameEngine::MEDIA::WINDOWER
 {
-    GLFW::GLFW(std::string name, bool fullscreen, int width, int height)
+    bool GLFW::init(GRAPHICS_API api, std::string name, bool fullscreen, int width, int height)
     {
+        if (isInit)
+        {
+            LOG::WARNING("GLFW", "Already Init");
+            return true;
+        }
+
         glfwInit();
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+        switch (api)
+        {
+        default:
+            LOG::ERROR("GLFW", "%s is not supported", api == DIRECTX ? "DirectX" : (api == METAL ? "Metal" : "Unknown"));
+            return isInit = false;
+            break;
+
+        case OPENGL:
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            break;
+        }
 
         window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
 
         if (window == nullptr)
         {
-            LOG::ERROR("GLFW", "Failed to Create GLFW");
+            LOG::ERROR("GLFW", "Failed to Create Window");
             glfwTerminate();
-            ok = false;
-            return;
+            return isInit = false;
+        }
+
+        switch (api)
+        {
+        case OPENGL:
+            glfwMakeContextCurrent(window);
+
+            // Load OpenGL
+            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            {
+                LOG::ERROR("GLFW", "Failed to Initialize Renderer (OpenGL)");
+                return isInit = false;
+            }
+            break;
+
+        default:
+            LOG::ERROR("GLFW", "Unexpected Error");
+            return isInit = false;
+            break;
         }
 
         glfwSetWindowUserPointer(window, this);
 
         // Set Callbacks
-        // no glfwSetWindowSizeCallback(window, callback_resize);
         glfwSetFramebufferSizeCallback(window, callback_resize);
-        // no glfwSetWindowContentScaleCallback(window, window_content_scale_callback);
-        // no glfwSetWindowPosCallback(window, window_pos_callback);
-
         glfwSetKeyCallback(window, callback_key);
         glfwSetCursorPosCallback(window, callback_cursor);
         glfwSetScrollCallback(window, callback_scroll);
 
-        // TODO: Joystick Input
-
-        // Fullscreen, if needed
-        setFullscreen(fullscreen);
-
-        setVSync(0);
+        return isInit = true;
     }
 
-    GLFW::~GLFW()
+    bool GLFW::clean()
     {
         glfwDestroyWindow(window);
         glfwTerminate();
-        window = nullptr;
+
+        return !(isInit = false);
     }
 
     bool GLFW::update()
@@ -59,40 +86,6 @@ namespace GameEngine::MEDIA::WINDOWER
         glfwPollEvents();
 
         return !glfwWindowShouldClose(window);
-    }
-
-    bool GLFW::setFullscreen(bool fullscreen)
-    {
-        if (isFullscreen() == fullscreen)
-            return true;
-
-        if (fullscreen)
-        {
-            // Get Monitor, if not set
-            if (monitor == nullptr)
-                monitor = glfwGetPrimaryMonitor();
-
-            // Exit if monitor is unavailable
-            if (monitor == nullptr)
-                return false;
-
-            // backup window position and window size
-            glfwGetWindowPos(window, &windowPos[0], &windowPos[1]);
-            glfwGetWindowSize(window, &width, &height);
-
-            // get resolution of monitor
-            const GLFWvidmode *mode = glfwGetVideoMode(monitor);
-
-            // switch to full screen
-            glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, 0);
-        }
-        else
-        {
-            // restore last window size and position
-            glfwSetWindowMonitor(window, nullptr, windowPos[0], windowPos[1], width, height, 0);
-        }
-
-        return true;
     }
 
     bool GLFW::key(std::string k)

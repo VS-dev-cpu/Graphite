@@ -7,8 +7,10 @@
 #include <GameEngine/core/MediaEngine/mixers/Mixer.h>
 #include <GameEngine/core/MediaEngine/mixers/OpenAL.h>
 
+// Windowers
+#include <GameEngine/core/MediaEngine/windowers/glfw.h>
+
 // Renderers
-#include <GameEngine/core/MediaEngine/renderers/Renderer.h>
 #include <GameEngine/core/MediaEngine/renderers/OpenGL.h>
 
 #include <vector>
@@ -56,7 +58,7 @@ namespace GameEngine::MEDIA
     {
     public:
         // Initialize Media Engine
-        MediaEngine(std::string name = "MediaEngine", bool fullscreen = true, int width = 720, int height = 480);
+        MediaEngine(GRAPHICS_API api, std::string name = "MediaEngine", bool fullscreen = true, int width = 720, int height = 480);
 
         // Destroy Media Engine
         ~MediaEngine();
@@ -80,6 +82,8 @@ namespace GameEngine::MEDIA
         std::string name;
         bool fullscreen;
         int width, height;
+
+        GRAPHICS_API api;
 
         bool running = false;
         bool quit = false;

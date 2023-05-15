@@ -1,21 +1,12 @@
 #include <GameEngine/core/MediaEngine/renderers/OpenGL.h>
 
+#include <GameEngine/utility/glad.h>
+
 namespace GameEngine::MEDIA::RENDERER
 {
-    OpenGL::OpenGL(std::string name, bool fullscreen, int width, int height)
+    bool OpenGL::init(Windower *wnd)
     {
-        // Init Windower
-        windower = new WINDOWER::GLFW(name, fullscreen, width, height);
-
-        glfwMakeContextCurrent(windower->window);
-
-        // Load OpenGL
-        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-        {
-            LOG::ERROR("OpenGL", "Failed to Initialize OpenGL");
-            ok = false;
-            return;
-        }
+        windower = wnd;
 
         shader s;
         s.vertex = "#version 300 es\n "
@@ -86,11 +77,18 @@ namespace GameEngine::MEDIA::RENDERER
 
         // Failed to Init Shader
         if (add("__builtin_shader_2d", s) == "")
+        {
             LOG::ERROR("OpenGL", "Failed to load 2D Shader");
+            return isInit = false;
+        }
+
+        return isInit = true;
     }
 
-    OpenGL::~OpenGL()
+    bool OpenGL::clean()
     {
+        // TODO: Release Resources
+        return false;
     }
 
     bool OpenGL::update()
@@ -99,12 +97,12 @@ namespace GameEngine::MEDIA::RENDERER
         return windower->update();
     }
 
-    void OpenGL::clear(float r, float g, float b, uint buffers)
+    void OpenGL::clear(float r, float g, float b)
     {
         // Clear Screen
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         glClearColor(r, g, b, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | buffers);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
     std::string OpenGL::add(std::string name, shader s)
