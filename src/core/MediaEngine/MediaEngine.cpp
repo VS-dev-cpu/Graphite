@@ -181,6 +181,38 @@ namespace GameEngine::MEDIA
                     renderer->clear(color.x, color.y, color.z);
                 }
                 break;
+
+                case ACTION::ADD_SHADER:
+                {
+                    // Add Shader
+                    std::pair<std::string, shader> sh = std::any_cast<std::pair<std::string, shader>>(data);
+                    renderer->add(sh.first, sh.second);
+                }
+                break;
+
+                case ACTION::ADD_TEXTURE:
+                {
+                    // Add Texture
+                    std::pair<std::string, texture> tex = std::any_cast<std::pair<std::string, texture>>(data);
+                    renderer->add(tex.first, tex.second);
+                }
+                break;
+
+                case ACTION::FREE_SHADER:
+                {
+                    // Free Shader
+                    std::string sh = std::any_cast<std::string>(data);
+                    renderer->free_shader(sh);
+                }
+
+                case ACTION::FREE_TEXTURE:
+                {
+                    // Free Texture
+                    std::string tex = std::any_cast<std::string>(data);
+                    renderer->free_texture(tex);
+                }
+                break;
+                    break;
                 }
             }
 

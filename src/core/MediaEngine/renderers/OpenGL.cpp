@@ -111,7 +111,7 @@ namespace GameEngine::MEDIA::RENDERER
     {
         const char *vertex = s.vertex.c_str();
         const char *fragment = s.fragment.c_str();
-        const char *geometry = s.geometry.c_str();
+        const char *geometry = s.geometry == "" ? nullptr : s.geometry.c_str();
 
         // Compile & Load Shader
         uint vert, frag, geo, id;
@@ -202,8 +202,69 @@ namespace GameEngine::MEDIA::RENDERER
 
     std::string OpenGL::add(std::string name, texture t)
     {
+        uint id;
+        if (t.data)
+        {
+            // Generate Empty Texture
+            glGenTextures(1, &id);
+            glBindTexture(GL_TEXTURE_2D, id);
+
+            // Select Color Mode
+            uint mode = GL_RGB;
+            switch (t.nrChannels)
+            {
+            default:
+            case 0:
+                LOG::WARNING("OpenGL", "Invalid Texture Channel(s)");
+                break;
+
+            case 1:
+                mode = GL_RED;
+                break;
+
+            case 2:
+                mode = GL_RG;
+                break;
+
+            case 3:
+                mode = GL_RGB;
+                break;
+
+            case 4:
+                mode = GL_RGBA;
+                break;
+            }
+
+            // Create Texture
+            glTexImage2D(GL_TEXTURE_2D, 0, mode, t.width, t.height, 0, mode, GL_UNSIGNED_BYTE, t.data);
+
+            // Generate MipMap & Set Parameters
+            glGenerateMipmap(GL_TEXTURE_2D);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        }
+        else
+        {
+            LOG::ERROR("OpenGL", "No Texture Data");
+            return "";
+        }
+
         LOG::SYSTEM("OpenGL", "Loaded Texture (%s)", name.c_str());
-        textures[name] = std::pair<texture, uint>(t, 0);
+        textures[name] = std::pair<texture, uint>(t, id);
         return name;
+    }
+
+    void OpenGL::free_shader(std::string name)
+    {
+        glDeleteProgram(shaders[name].second);
+        shaders.erase(name);
+    }
+
+    void OpenGL::free_texture(std::string name)
+    {
+        free(textures[name].first.data);
+        textures.erase(name);
     }
 }

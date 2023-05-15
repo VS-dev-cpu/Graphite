@@ -25,22 +25,22 @@ namespace GameEngine::MEDIA
         enum ENUM
         {
             // Basic Management
-            PASS,  // Do Nothing [TM]
-            SLEEP, // Sleep Some Time
-            PRINT, // Print out a String (for Debugging)
+            PASS,  // Do Nothing [TM] (void)
+            SLEEP, // Sleep Some Time (float)
+            PRINT, // Print out a String (std::string)
 
             // Resource Loading
-            ADD_SHADER,  // Add Shader
-            ADD_TEXTURE, // Add Texture
-            ADD_MESH,    // Add Mesh
+            ADD_SHADER,  // Add Shader (std::pair<std::string, shader>)
+            ADD_TEXTURE, // Add Texture std::pair<std::string, texture>
+            ADD_MESH,    // Add Mesh (TODO)
 
             // Resource Freeing
-            FREE_SHADER,  // Free Shader
-            FREE_TEXTURE, // Free Texture
-            FREE_MESH,    // Free Mesh
+            FREE_SHADER,  // Free Shader (std::string)
+            FREE_TEXTURE, // Free Texture (std::string)
+            FREE_MESH,    // Free Mesh (TODO)
 
             // Rendering
-            CLEAR,        // Clear Screen
+            CLEAR,        // Clear Screen (vec3)
             DRAW_TEXTURE, // Render Image
             DRAW_MESH,    // Render Mesh
 

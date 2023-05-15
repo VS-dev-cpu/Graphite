@@ -24,9 +24,9 @@ namespace GameEngine
 
     struct shader
     {
-        std::string vertex;
-        std::string fragment;
-        std::string geometry;
+        std::string vertex = "";
+        std::string fragment = "";
+        std::string geometry = "";
     };
 
     struct material

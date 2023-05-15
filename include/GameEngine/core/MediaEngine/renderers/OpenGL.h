@@ -24,6 +24,9 @@ namespace GameEngine::MEDIA::RENDERER
         std::string add(std::string name, shader s);
         std::string add(std::string name, texture tex);
 
+        void free_shader(std::string name);
+        void free_texture(std::string name);
+
     private:
         WINDOWER::GLFW *windower = nullptr;
 
