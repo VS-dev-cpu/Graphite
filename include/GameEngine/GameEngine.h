@@ -46,6 +46,7 @@ namespace GameEngine
 
         // Engine Flags
         bool running = false;  // is Engine Running ?
+        bool quit = false;     // should quit ?
         bool drawable = false; // Has New Drawable Content ?
 
         std::map<std::string, Module *> modules; // Game Engine Modules

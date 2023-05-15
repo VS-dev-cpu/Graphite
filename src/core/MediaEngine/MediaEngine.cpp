@@ -47,6 +47,11 @@ namespace GameEngine::MEDIA
         // TODO: Check if renderthread stopped
     }
 
+    void MediaEngine::exit()
+    {
+        quit = true;
+    }
+
     void MediaEngine::reset()
     {
         // Stop Threads
@@ -119,7 +124,12 @@ namespace GameEngine::MEDIA
 
         // Wait for Engine to Start
         while (!engine->running)
-            ;
+            if (engine->quit)
+            {
+                pthread_exit(nullptr);
+                return nullptr;
+            }
+
         // TODO: Check if Engine Stopped
 
         // Initialize Renderer
@@ -218,6 +228,9 @@ namespace GameEngine::MEDIA
             // Update Screen
             engine->running = renderer->update();
             engine->renderQueue.clear();
+
+            if (engine->quit)
+                engine->running = false;
         }
 
         delete renderer;

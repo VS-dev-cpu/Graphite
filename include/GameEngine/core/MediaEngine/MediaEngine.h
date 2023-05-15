@@ -67,6 +67,8 @@ namespace GameEngine::MEDIA
         // Wait for RenderThread and pass new list
         void update();
 
+        void exit();
+
         // Reset MediaEngine
         void reset();
 
@@ -80,6 +82,7 @@ namespace GameEngine::MEDIA
         int width, height;
 
         bool running = false;
+        bool quit = false;
 
     private:
         // Mixer Thread
