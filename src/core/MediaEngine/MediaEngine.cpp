@@ -212,7 +212,6 @@ namespace GameEngine::MEDIA
                     renderer->free_texture(tex);
                 }
                 break;
-                    break;
                 }
             }
 
