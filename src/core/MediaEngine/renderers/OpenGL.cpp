@@ -111,7 +111,6 @@ namespace GameEngine::MEDIA::RENDERER
 
     bool OpenGL::update()
     {
-        glViewport(0, 0, windower->width, windower->height);
         return windower->update();
     }
 
@@ -272,16 +271,20 @@ namespace GameEngine::MEDIA::RENDERER
         return name;
     }
 
-    void OpenGL::draw_texture(std::string name)
+    void OpenGL::draw_texture(std::string name, vec2 center, vec2 size, float rotation)
     {
+        // Select 2D Renderer
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        glViewport(0, 0, windower->width, windower->height);
         glUseProgram(shaders["__default"].second);
 
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textures[name].second);
 
-        glUniform2f(glGetUniformLocation(shaders["__default"].second, "center"), 0.0f, 0.0f);
-        glUniform2f(glGetUniformLocation(shaders["__default"].second, "size"), 0.6f, 0.6f);
+        glUniform2f(glGetUniformLocation(shaders["__default"].second, "center"), center.x, center.y);
+        glUniform2f(glGetUniformLocation(shaders["__default"].second, "size"), size.x, size.y);
         glUniform2f(glGetUniformLocation(shaders["__default"].second, "ratio"), 1.0f, (float)windower->width / (float)windower->height);
+        glUniform1f(glGetUniformLocation(shaders["__default"].second, "rotation"), rotation);
 
         glBindVertexArray(VAO);
         // glDrawArrays(GL_TRIANGLES, 0, 6);

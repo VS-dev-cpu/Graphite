@@ -18,7 +18,7 @@ namespace GameEngine::MEDIA::RENDERER
         std::string add(std::string name, shader s);
         std::string add(std::string name, texture tex);
 
-        void draw_texture(std::string name);
+        void draw_texture(std::string name, vec2 center = {}, vec2 size = vec2(0.5f, 0.5f), float rotation = 0.0f);
 
         void free_shader(std::string name);
         void free_texture(std::string name);

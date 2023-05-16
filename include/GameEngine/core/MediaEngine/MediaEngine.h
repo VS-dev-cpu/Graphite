@@ -15,6 +15,7 @@
 
 #include <vector>
 #include <variant>
+#include <tuple>
 #include <any>
 
 namespace GameEngine::MEDIA

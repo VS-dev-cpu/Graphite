@@ -222,8 +222,8 @@ namespace GameEngine::MEDIA
                 case ACTION::DRAW_TEXTURE:
                 {
                     // Draw Texture
-                    std::string tex = std::any_cast<std::string>(data);
-                    renderer->draw_texture(tex);
+                    auto [name, center, size, rotation] = std::any_cast<std::tuple<std::string, vec2, vec2, float>>(data);
+                    renderer->draw_texture(name, center, size, rotation);
                 }
                 break;
 
