@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O1 -Wall")
+
 find_package(ReactPhysics3D REQUIRED)
 
 project(GameEngine)
@@ -26,6 +28,7 @@ add_library(GameEngine
 
     # -- Utility --
     src/utility/glad.c
+    src/utility/stb_image.c
     )
 
 target_include_directories(GameEngine PUBLIC include)

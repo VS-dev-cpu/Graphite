@@ -2,8 +2,6 @@
 #include <GameEngine/core/load.h>
 #include <iostream>
 
-#include <GameEngine/utility/stb_image.h>
-
 using namespace std;
 
 class Game : public GameEngine::Module
@@ -26,13 +24,15 @@ public:
 
 private:
     GameEngine::texture tex;
+
+    float max = 0.0f;
 };
 
 int main()
 {
     GameEngine::GameEngine engine("Hello World", false);
 
-    engine.add("Game", new Game());
+    engine.add(new Game());
 
     GameEngine::LOG::DEBUG("Main", "Hello");
 

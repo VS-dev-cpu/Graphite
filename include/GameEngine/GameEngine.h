@@ -2,7 +2,6 @@
 
 #include <GameEngine/core/log.h>
 
-// TODO: Remove #include <GameEngine/core/Renderer.h>
 #include <GameEngine/core/PhysicsEngine/PhysicsEngine.h>
 
 #include <GameEngine/types/module.h>
@@ -30,8 +29,8 @@ namespace GameEngine
         // Start Main Game Loop
         void start();
 
-        // Add Game Module
-        std::string add(std::string name, Module *module);
+        // Add Module (Script)
+        uint add(Module *module);
 
     public:
         // Main Thread Timing
@@ -49,7 +48,7 @@ namespace GameEngine
         bool quit = false;     // should quit ?
         bool drawable = false; // Has New Drawable Content ?
 
-        std::map<std::string, Module *> modules; // Game Engine Modules
+        std::vector<Module *> modules; // Modules
 
     private:
     };

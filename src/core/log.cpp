@@ -36,7 +36,7 @@ namespace GameEngine
         // Print a Custom Log
         void CUSTOM(char type, std::string whereami, std::string message, va_list args)
         {
-            if (whereami.length() > max)
+            if ((int)whereami.length() > max)
             {
                 if (c > 8)
                 {
@@ -49,7 +49,7 @@ namespace GameEngine
 
             for (int i = whereami.length(); i < max; i++)
                 whereami += ' ';
-            if (whereami.length() > max)
+            if ((int)whereami.length() > max)
             {
                 whereami.erase(max, std::string::npos);
                 whereami[max - 1] = '.';

@@ -4,6 +4,8 @@
 
 #include <GameEngine/types/base.h>
 
+#include <GameEngine/utility/stb_image.h>
+
 namespace GameEngine
 {
     namespace LOAD

@@ -4,6 +4,21 @@ namespace GameEngine::MEDIA
 {
     MediaEngine::MediaEngine(std::string name, bool fullscreen, int width, int height) : name(name), fullscreen(fullscreen), width(width), height(height)
     {
+    }
+
+    MediaEngine::~MediaEngine()
+    {
+        // Stop Threads
+        running = false;
+        // pthread_join(mixerThread, NULL);
+        pthread_join(renderThread, NULL);
+    }
+
+    void MediaEngine::start(GRAPHICS_API gAPI, bool multithreading)
+    {
+        api = gAPI;
+        running = true;
+
         // Try to create Mixer Thread
         int err = pthread_create(&mixerThread, nullptr, &mix, this);
 
@@ -19,20 +34,6 @@ namespace GameEngine::MEDIA
             LOG::ERROR("MediaEngine", "Render Thread Failed");
         else
             LOG::SYSTEM("MediaEngine", "Renderer Initialized");
-    }
-
-    MediaEngine::~MediaEngine()
-    {
-        // Stop Threads
-        running = false;
-        pthread_join(mixerThread, NULL);
-        pthread_join(renderThread, NULL);
-    }
-
-    void MediaEngine::start(GRAPHICS_API gAPI, bool multithreading)
-    {
-        api = gAPI;
-        running = true;
     }
 
     void MediaEngine::update()
@@ -91,15 +92,10 @@ namespace GameEngine::MEDIA
         MediaEngine *engine = (MediaEngine *)arg;
         pthread_detach(pthread_self());
 
-        // Wait for Engine to Start
-        while (!engine->running)
-            ;
-
         // Initialize Mixer
         Mixer *mixer;
 
-        if (true)
-            mixer = new MIXER::OpenAL();
+        mixer = new MIXER::OpenAL();
 
         if (!mixer->ok)
             LOG::ERROR("MixerThread", "Failed to start Mixer");
@@ -120,16 +116,9 @@ namespace GameEngine::MEDIA
 
     void *MediaEngine::render(void *arg)
     {
+        // Detach Thread
         MediaEngine *engine = (MediaEngine *)arg;
         pthread_detach(pthread_self());
-
-        // Wait for Engine to Start
-        while (!engine->running)
-            if (engine->quit)
-            {
-                pthread_exit(nullptr);
-                return nullptr;
-            }
 
         // Initialize Windower
         Windower *windower = new WINDOWER::GLFW;
@@ -159,7 +148,7 @@ namespace GameEngine::MEDIA
             // Get Render Queue
             while (!engine->drawable)
                 if (!engine->running)
-                    return 0;
+                    return nullptr;
 
             auto tasks = engine->renderQueue;
             engine->drawable = false;

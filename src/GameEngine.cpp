@@ -21,7 +21,7 @@ namespace GameEngine
         me.start(MEDIA::OPENGL);
 
         // Initialize Modules
-        for (auto [name, module] : modules)
+        for (auto module : modules)
             module->init();
 
         LOG::SYSTEM("GameEngine", "Started Successfully");
@@ -38,7 +38,7 @@ namespace GameEngine
             double start = time(); // [MainTime] Start
 
             // Update Modules
-            for (auto [name, module] : modules)
+            for (auto module : modules)
                 module->update(deltaTime);
 
             // Update Render Queue
@@ -46,19 +46,11 @@ namespace GameEngine
         }
     }
 
-    std::string GameEngine::add(std::string name, Module *module)
+    uint GameEngine::add(Module *module)
     {
+        modules.push_back(module);
+
         module->engine = this;
-
-        uint i = 0;
-        if (modules.count(name) > 0)
-        {
-            while (modules.count(name + std::to_string(i)) > 0)
-                i++;
-            name += std::to_string(i);
-        }
-
-        modules[name] = module;
-        return name;
+        return module->id = modules.size() - 1;
     }
 }

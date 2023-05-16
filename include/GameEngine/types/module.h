@@ -14,7 +14,7 @@ namespace GameEngine
         // ---- Variables ----
 
         GameEngine *engine = nullptr; // hosting Game Engine
-        std::string name;             // Module's Name
+        uint id = 0;                  // module's ID (inside Game Engine)
 
         // ---- Management ----
 

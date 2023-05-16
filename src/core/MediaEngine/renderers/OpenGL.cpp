@@ -106,6 +106,8 @@ namespace GameEngine::MEDIA::RENDERER
         for (auto [name, sh] : shaders)
             glDeleteShader(sh.second);
 
+        LOG::SYSTEM("OpenGL", "Cleanup Finished");
+
         return true;
     }
 

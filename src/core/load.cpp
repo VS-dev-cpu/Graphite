@@ -1,8 +1,5 @@
 #include <GameEngine/core/load.h>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <GameEngine/utility/stb_image.h>
-
 #include <fstream>
 
 namespace GameEngine::LOAD
