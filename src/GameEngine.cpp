@@ -3,7 +3,7 @@
 namespace GameEngine
 {
     // Initialize Engine
-    GameEngine::GameEngine(std::string name, bool fullscreen, int width, int height) : me(MEDIA::OPENGL, name, fullscreen, width, height)
+    GameEngine::GameEngine(std::string name, bool fullscreen, int width, int height) : me(name, fullscreen, width, height)
     {
         LOG::SYSTEM("GameEngine", "Initialized");
     }
@@ -18,7 +18,7 @@ namespace GameEngine
     void GameEngine::start()
     {
         // Start Render Thread Loop
-        me.start();
+        me.start(MEDIA::OPENGL);
 
         // Initialize Modules
         for (auto [name, module] : modules)

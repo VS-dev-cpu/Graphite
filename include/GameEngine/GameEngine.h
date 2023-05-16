@@ -36,11 +36,11 @@ namespace GameEngine
     public:
         // Main Thread Timing
         double now, deltaTime;
+
+        // Media Engine
         MEDIA::MediaEngine me;
 
     private:
-        // Media Engine
-
         // Main Physics Engine
         Physics physics;
 

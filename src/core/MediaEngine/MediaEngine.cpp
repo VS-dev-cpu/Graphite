@@ -2,7 +2,7 @@
 
 namespace GameEngine::MEDIA
 {
-    MediaEngine::MediaEngine(GRAPHICS_API api, std::string name, bool fullscreen, int width, int height) : api(api), name(name), fullscreen(fullscreen), width(width), height(height)
+    MediaEngine::MediaEngine(std::string name, bool fullscreen, int width, int height) : name(name), fullscreen(fullscreen), width(width), height(height)
     {
         // Try to create Mixer Thread
         int err = pthread_create(&mixerThread, nullptr, &mix, this);
@@ -29,8 +29,9 @@ namespace GameEngine::MEDIA
         pthread_join(renderThread, NULL);
     }
 
-    void MediaEngine::start(bool multithreading)
+    void MediaEngine::start(GRAPHICS_API gAPI, bool multithreading)
     {
+        api = gAPI;
         running = true;
     }
 
@@ -50,8 +51,10 @@ namespace GameEngine::MEDIA
         quit = true;
     }
 
-    void MediaEngine::reset()
+    void MediaEngine::reset(GRAPHICS_API gAPI)
     {
+        api = gAPI;
+
         // Stop Threads
         running = false;
         pthread_join(mixerThread, NULL);
@@ -150,8 +153,6 @@ namespace GameEngine::MEDIA
         if (!renderer->isInit)
             LOG::ERROR("MediaEngine::RenderThread", "Failed to init Renderer");
 
-        // TODO: Fix RenderThread freezing up
-
         // Main Render Loop
         while (engine->running)
         {
@@ -237,7 +238,6 @@ namespace GameEngine::MEDIA
 
             // Update Screen
             engine->running = renderer->update();
-            engine->renderQueue.clear();
 
             if (engine->quit)
                 engine->running = false;

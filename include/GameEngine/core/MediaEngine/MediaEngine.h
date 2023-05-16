@@ -58,21 +58,21 @@ namespace GameEngine::MEDIA
     {
     public:
         // Initialize Media Engine
-        MediaEngine(GRAPHICS_API api, std::string name = "MediaEngine", bool fullscreen = true, int width = 720, int height = 480);
+        MediaEngine(std::string name = "MediaEngine", bool fullscreen = true, int width = 720, int height = 480);
 
         // Destroy Media Engine
         ~MediaEngine();
 
         // Start Media Engine
-        void start(bool multithreading = true);
+        void start(GRAPHICS_API gAPI = OPENGL, bool multithreading = true);
 
         // Wait for RenderThread and pass new list
         void update();
 
         void exit();
 
-        // Reset MediaEngine
-        void reset();
+        // Reset Renderer & Mixer
+        void reset(GRAPHICS_API gAPI = OPENGL);
 
         // Add Action to Queue
         void add(ACTION::ENUM action, RenderData data);

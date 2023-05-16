@@ -1,5 +1,6 @@
 #include <GameEngine/core/load.h>
 
+#define STB_IMAGE_IMPLEMENTATION
 #include <GameEngine/utility/stb_image.h>
 
 #include <fstream>
@@ -43,6 +44,9 @@ namespace GameEngine::LOAD
         texture out;
         stbi_set_flip_vertically_on_load(1);
         out.data = stbi_load(path.c_str(), &out.width, &out.height, &out.nrChannels, 0);
+
+        if (!out.data)
+            LOG::WARNING("Image", "Failed to load Image (%s)", path.c_str());
 
         return out;
     }
