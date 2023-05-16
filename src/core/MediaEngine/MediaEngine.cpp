@@ -219,6 +219,14 @@ namespace GameEngine::MEDIA
                 }
                 break;
 
+                case ACTION::DRAW_TEXTURE:
+                {
+                    // Draw Texture
+                    std::string tex = std::any_cast<std::string>(data);
+                    renderer->draw_texture(tex);
+                }
+                break;
+
                 case ACTION::FREE_SHADER:
                 {
                     // Free Shader

@@ -22,6 +22,8 @@ namespace GameEngine::MEDIA
         virtual std::string add(std::string name, shader s) { return ""; }
         virtual std::string add(std::string name, texture tex) { return ""; }
 
+        virtual void draw_texture(std::string name) {}
+
         virtual void free_shader(std::string name) {}
         virtual void free_texture(std::string name) {}
 

@@ -36,59 +36,77 @@ namespace GameEngine::MEDIA::RENDERER
                      "out vec4 FragColor;\n"
                      "in vec2 TexCoord;\n"
                      "in vec2 FragPos;\n"
-                     "uniform int type;\n"
                      "uniform sampler2D tex;\n"
-                     "uniform vec3 color;\n"
-                     "uniform float cutradius;\n"
                      "void main()\n"
                      "{\n"
-                     "    switch (type)\n"
-                     "    {\n"
-                     "    case 0:\n"
-                     "        // Color\n"
-                     "        FragColor = vec4(color.rgb, 1.0);\n"
-                     "        break;\n"
-                     "    case 1:\n"
-                     "        // Texture\n"
-                     "        FragColor = texture(tex, TexCoord);\n"
-                     "        break;\n"
-                     "    case 2:\n"
-                     "        // Text\n"
-                     "        FragColor = vec4(color.rgb, length(texture(tex, TexCoord).rgb));\n"
-                     "        break;\n"
-                     "    case 3:\n"
-                     "        // Circle\n"
-                     "        vec2 val = FragPos;\n"
-                     "        float R = 1.0f;\n"
-                     "        float R2 = cutradius;\n"
-                     "        float dist = sqrt(dot(val, val));\n"
-                     "        //if (dist >= R || dist <= R2)\n"
-                     "            \n"
-                     "        float sm = smoothstep(R, R - 0.01, dist);\n"
-                     "        float sm2 = smoothstep(R2, R2 + 0.01, dist);\n"
-                     "        float alpha = sm * sm2;\n"
-                     "        FragColor = vec4(color.xyz, 1.0);\n"
-                     "        break;\n"
-                     "    default:\n"
-                     "        FragColor = vec4(color.xyz, 0.0);\n"
-                     "        break;\n"
-                     "    }\n"
+                     "    FragColor = texture(tex, TexCoord);\n"
                      "}";
 
         // Failed to Init Shader
-        if (add("__builtin_shader_2d", s) == "")
+        if (add("__default", s) == "")
         {
             LOG::ERROR("OpenGL", "Failed to load 2D Shader");
             return isInit = false;
         }
+
+        // Load 2D Renderer
+        float vertices[] = {
+            // positions      // texture coords
+            -1.0f, 1.0f, 0.0f, 1.0f,  // top right
+            -1.0f, -1.0f, 0.0f, 0.0f, // bottom right
+            1.0f, -1.0f, 1.0f, 0.0f,  // bottom left
+            1.0f, 1.0f, 1.0f, 1.0f    // top left
+        };
+
+        uint indices[] = {
+            0, 1, 3, // first triangle
+            1, 2, 3  // second triangle
+        };
+
+        glGenVertexArrays(1, &VAO);
+        glGenBuffers(1, &VBO);
+        glGenBuffers(1, &EBO);
+
+        glBindVertexArray(VAO);
+
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+        // position attribute
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)0);
+        glEnableVertexAttribArray(0);
+        // texture coord attribute
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)(2 * sizeof(float)));
+        glEnableVertexAttribArray(1);
+
+        // Config OpenGL
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_CULL_FACE);
 
         return isInit = true;
     }
 
     bool OpenGL::clean()
     {
-        // TODO: Release Resources
-        return false;
+        glDeleteBuffers(1, &VBO);
+        glDeleteVertexArrays(1, &VAO);
+
+        // Free Textures
+        for (auto [name, tex] : textures)
+        {
+            free(tex.first.data);
+            glDeleteTextures(1, &tex.second);
+        }
+
+        // Free Shaders
+        for (auto [name, sh] : shaders)
+            glDeleteShader(sh.second);
+
+        return true;
     }
 
     bool OpenGL::update()
@@ -252,6 +270,22 @@ namespace GameEngine::MEDIA::RENDERER
         LOG::SYSTEM("OpenGL", "Loaded Texture (%s)", name.c_str());
         textures[name] = std::pair<texture, uint>(t, id);
         return name;
+    }
+
+    void OpenGL::draw_texture(std::string name)
+    {
+        glUseProgram(shaders["__default"].second);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, textures[name].second);
+
+        glUniform2f(glGetUniformLocation(shaders["__default"].second, "center"), 0.0f, 0.0f);
+        glUniform2f(glGetUniformLocation(shaders["__default"].second, "size"), 0.6f, 0.6f);
+        glUniform2f(glGetUniformLocation(shaders["__default"].second, "ratio"), 1.0f, (float)windower->width / (float)windower->height);
+
+        glBindVertexArray(VAO);
+        // glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     }
 
     void OpenGL::free_shader(std::string name)
