@@ -66,7 +66,7 @@ namespace GameEngine::MEDIA::WINDOWER
         glfwSetCursorPosCallback(window, callback_cursor);
         glfwSetScrollCallback(window, callback_scroll);
 
-        glfwSwapInterval(0);
+        glfwSwapInterval(1);
 
         return isInit = true;
     }
