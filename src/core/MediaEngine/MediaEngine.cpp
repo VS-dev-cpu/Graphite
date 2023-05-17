@@ -42,6 +42,7 @@ namespace GameEngine::MEDIA
         drawable = true;
         while (drawable)
             ;
+
         renderQueue.clear();
     }
 
@@ -233,7 +234,7 @@ namespace GameEngine::MEDIA
             }
 
             // Update Screen
-            // engine->running = renderer->update();
+            engine->running = renderer->update();
             tasks.clear();
 
             if (engine->quit)
