@@ -41,9 +41,7 @@ namespace GameEngine::MEDIA
         // Push Render Queue
         drawable = true;
         while (drawable)
-            if (!running)
-                return;
-
+            ;
         renderQueue.clear();
     }
 
@@ -95,10 +93,10 @@ namespace GameEngine::MEDIA
         // Initialize Mixer
         Mixer *mixer;
 
-        mixer = new MIXER::OpenAL();
+        // mixer = new MIXER::OpenAL();
 
-        if (!mixer->ok)
-            LOG::ERROR("MixerThread", "Failed to start Mixer");
+        // if (!mixer->ok)
+        //     LOG::ERROR("MixerThread", "Failed to start Mixer");
 
         // Main Mixer Loop
         while (engine->running)
@@ -150,7 +148,7 @@ namespace GameEngine::MEDIA
                 if (!engine->running)
                     return nullptr;
 
-            auto tasks = engine->renderQueue;
+            auto tasks = engine->renderQueue; // TODO: fix RenderQueue Issue
             engine->drawable = false;
 
             // Draw Render Queue (content)
@@ -159,10 +157,11 @@ namespace GameEngine::MEDIA
                 switch (action)
                 {
                 default:
+                    // Invalid ENUM
+                    LOG::WARNING("RenderThread", "Invalid Enum: %i", action);
                 case ACTION::PASS:
                 {
                     // Do Nothing
-                    // PASS or Invalid ENUM
                 }
                 break;
 
@@ -234,7 +233,8 @@ namespace GameEngine::MEDIA
             }
 
             // Update Screen
-            engine->running = renderer->update();
+            // engine->running = renderer->update();
+            tasks.clear();
 
             if (engine->quit)
                 engine->running = false;

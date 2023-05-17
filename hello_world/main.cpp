@@ -7,6 +7,7 @@ using namespace std;
 class Game : public GameEngine::Module
 {
 public:
+    // TODO: Easier 2D Renderer (direct-access or wrapper)
     void init()
     {
         GameEngine::LOG::DEBUG("GameModule", "Hello");
@@ -24,8 +25,6 @@ public:
 
 private:
     GameEngine::texture tex;
-
-    float max = 0.0f;
 };
 
 int main()
