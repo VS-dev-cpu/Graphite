@@ -30,7 +30,7 @@ namespace GameEngine::MEDIA
     void MediaEngine::update()
     {
         drawable = true;
-        while (drawable)
+        while (drawable && running && !quit)
             ;
 
         renderQueue.clear();
@@ -96,7 +96,7 @@ namespace GameEngine::MEDIA
         // Main Render Loop
         while (engine->running)
         {
-            while (!engine->drawable)
+            while (!engine->drawable && engine->running && !engine->quit)
                 ;
 
             auto tasks = engine->renderQueue; // TODO: fix RenderQueue Issue
