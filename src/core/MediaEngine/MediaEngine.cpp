@@ -10,25 +10,16 @@ namespace GameEngine::MEDIA
     {
         // Stop Threads
         running = false;
-        // pthread_join(mixerThread, NULL);
         pthread_join(renderThread, NULL);
     }
 
     void MediaEngine::start(GRAPHICS_API gAPI, bool multithreading)
     {
-        api = gAPI;
         running = true;
-
-        // Try to create Mixer Thread
-        int err = pthread_create(&mixerThread, nullptr, &mix, this);
-
-        if (err != 0)
-            LOG::ERROR("MediaEngine", "Mixer Thread Failed");
-        else
-            LOG::SYSTEM("MediaEngine", "Mixer Initialized");
+        api = gAPI;
 
         // Try to create Render Thread
-        err = pthread_create(&renderThread, nullptr, &render, this);
+        int err = pthread_create(&renderThread, nullptr, &render, this);
 
         if (err != 0)
             LOG::ERROR("MediaEngine", "Render Thread Failed");
@@ -38,7 +29,6 @@ namespace GameEngine::MEDIA
 
     void MediaEngine::update()
     {
-        // Push Render Queue
         drawable = true;
         while (drawable)
             ;
@@ -57,21 +47,10 @@ namespace GameEngine::MEDIA
 
         // Stop Threads
         running = false;
-        pthread_join(mixerThread, NULL);
         pthread_join(renderThread, NULL);
 
-        // Restart Mixer Thread
-        int err = pthread_create(&mixerThread, nullptr, &mix, this);
-
-        if (err == 0)
-            // Everything is ok
-            LOG::SYSTEM("MediaEngine", "Restarted Mixer Thread");
-        else
-            // render thread is not ok
-            LOG::ERROR("MediaEngine", "Failed to restart Mixer Thread");
-
         // Restart Render Thread
-        err = pthread_create(&renderThread, nullptr, &render, this);
+        int err = pthread_create(&renderThread, nullptr, &render, this);
 
         if (err == 0)
             // Everything is ok
@@ -84,33 +63,6 @@ namespace GameEngine::MEDIA
     void MediaEngine::add(ACTION::ENUM action, RenderData data)
     {
         renderQueue.push_back(RenderTask(action, data));
-    }
-
-    void *MediaEngine::mix(void *arg)
-    {
-        MediaEngine *engine = (MediaEngine *)arg;
-        pthread_detach(pthread_self());
-
-        // Initialize Mixer
-        Mixer *mixer;
-
-        // mixer = new MIXER::OpenAL();
-
-        // if (!mixer->ok)
-        //     LOG::ERROR("MixerThread", "Failed to start Mixer");
-
-        // Main Mixer Loop
-        while (engine->running)
-        {
-            // TODO: Mix
-        }
-
-        delete mixer;
-        mixer = nullptr;
-
-        // exit thread
-        pthread_exit(nullptr);
-        return nullptr;
     }
 
     void *MediaEngine::render(void *arg)
@@ -144,10 +96,8 @@ namespace GameEngine::MEDIA
         // Main Render Loop
         while (engine->running)
         {
-            // Get Render Queue
             while (!engine->drawable)
-                if (!engine->running)
-                    return nullptr;
+                ;
 
             auto tasks = engine->renderQueue; // TODO: fix RenderQueue Issue
             engine->drawable = false;

@@ -13,6 +13,7 @@
 // Renderers
 #include <GameEngine/core/MediaEngine/renderers/OpenGL.h>
 
+#include <atomic>
 #include <vector>
 #include <variant>
 #include <tuple>
@@ -84,23 +85,22 @@ namespace GameEngine::MEDIA
         bool fullscreen;
         int width, height;
 
-        GRAPHICS_API api;
-
-        bool running = false;
-        bool quit = false;
+        std::atomic<bool> running = false;
+        std::atomic<bool> quit = false;
 
     private:
-        // Mixer Thread
-        pthread_t mixerThread;
-
         // Render Thread
         pthread_t renderThread;
 
+        pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+        pthread_cond_t renderSignal = PTHREAD_COND_INITIALIZER;
+
+        std::atomic<bool> drawable = false;
+
         std::vector<RenderTask> renderQueue;
-        bool drawable = false;
+        MEDIA::GRAPHICS_API api;
 
     private:
-        static void *mix(void *arg);
         static void *render(void *arg);
     };
 }
