@@ -36,10 +36,9 @@ namespace GameEngine::MEDIA
         // Scroll Position
         vec2 scroll;
 
-
         // Window Size
         int width, height;
-        
+
         // Is Library Init ?
         bool isInit = false;
     };

@@ -29,6 +29,9 @@ namespace GameEngine
         // Start Main Game Loop
         void start();
 
+        // Get Key State
+        bool key(std::string k);
+
         // Add Module (Script)
         uint add(Module *module);
 
@@ -38,6 +41,8 @@ namespace GameEngine
 
         // Media Engine
         MEDIA::MediaEngine me;
+
+        vec2 cursor;
 
     private:
         // Main Physics Engine
