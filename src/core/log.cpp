@@ -28,6 +28,7 @@ namespace GameEngine
         return time.c_str();
     }
 
+    // Logging Functions
     namespace LOG
     {
         int max = 12;
