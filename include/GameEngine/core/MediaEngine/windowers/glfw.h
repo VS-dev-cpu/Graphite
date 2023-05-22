@@ -19,7 +19,7 @@ namespace GameEngine::MEDIA::WINDOWER
     struct GLFW : Windower
     {
         // Initialize GLFW
-        bool init(GRAPHICS_API api = OPENGL, std::string name = "GLFW Window", bool fullscreen = true, int width = 1920, int height = 1080);
+        bool init(std::string name = "GLFW Window", bool fullscreen = true, int width = 1920, int height = 1080);
 
         // Destroy Window
         bool clean();

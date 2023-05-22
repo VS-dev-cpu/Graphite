@@ -4,17 +4,9 @@ namespace GameEngine::MEDIA
 {
     MediaEngine::MediaEngine(std::string name, bool fullscreen, int width, int height) : name(name), fullscreen(fullscreen), width(width), height(height)
     {
-    }
+        windower = new WINDOWER::GLFW;
+        renderer = new RENDERER::OpenGL;
 
-    MediaEngine::~MediaEngine()
-    {
-        // Stop Threads
-        running = false;
-        pthread_join(renderThread, NULL);
-    }
-
-    void MediaEngine::start(bool multithreading)
-    {
         running = true;
 
         // Try to create Render Thread
@@ -24,6 +16,13 @@ namespace GameEngine::MEDIA
             LOG::ERROR("MediaEngine", "Render Thread Failed");
         else
             LOG::SYSTEM("MediaEngine", "Renderer Initialized");
+    }
+
+    MediaEngine::~MediaEngine()
+    {
+        // Stop Threads
+        running = false;
+        pthread_join(renderThread, NULL);
     }
 
     void MediaEngine::update()
@@ -40,23 +39,6 @@ namespace GameEngine::MEDIA
         quit = true;
     }
 
-    void MediaEngine::reset()
-    {
-        // Stop Threads
-        running = false;
-        pthread_join(renderThread, NULL);
-
-        // Restart Render Thread
-        int err = pthread_create(&renderThread, nullptr, &render, this);
-
-        if (err == 0)
-            // Everything is ok
-            LOG::SYSTEM("MediaEngine", "Restarted Render Thread");
-        else
-            // render thread is not ok
-            LOG::ERROR("MediaEngine", "Failed to restart Render Thread");
-    }
-
     void MediaEngine::add(ACTION::ENUM action, RenderData data)
     {
         renderQueue.push_back(RenderTask(action, data));
@@ -69,26 +51,14 @@ namespace GameEngine::MEDIA
         pthread_detach(pthread_self());
 
         // Initialize Windower
-        Windower *windower = new WINDOWER::GLFW;
-        if (!windower->init(engine->api, engine->name, engine->fullscreen, engine->width, engine->height))
+        if (!engine->windower->init(engine->name, engine->fullscreen, engine->width, engine->height))
             LOG::ERROR("MediaEngine", "Failed to init Windower");
 
         // Initialize Renderer
-        Renderer *renderer;
+        engine->renderer->init(engine->windower);
 
-        switch (engine->api)
-        {
-        default:
-            LOG::WARNING("MediaEngine::RenderThread", "Unknown Renderer");
-        case OPENGL:
-            renderer = new RENDERER::OpenGL;
-            break;
-        }
-
-        renderer->init(windower);
-
-        if (!renderer->isInit)
-            LOG::ERROR("MediaEngine::RenderThread", "Failed to init Renderer");
+        if (!engine->renderer->isInit)
+            LOG::ERROR("MediaEngine", "Failed to init Renderer");
 
         // Main Render Loop
         while (engine->running)
@@ -135,7 +105,7 @@ namespace GameEngine::MEDIA
                 {
                     // Clear Screen
                     vec3 color = std::any_cast<vec3>(data);
-                    renderer->clear(color.x, color.y, color.z);
+                    engine->renderer->clear(color.x, color.y, color.z);
                 }
                 break;
 
@@ -143,7 +113,7 @@ namespace GameEngine::MEDIA
                 {
                     // Add Shader
                     std::pair<std::string, shader> sh = std::any_cast<std::pair<std::string, shader>>(data);
-                    renderer->add(sh.first, sh.second);
+                    engine->renderer->add(sh.first, sh.second);
                 }
                 break;
 
@@ -151,7 +121,7 @@ namespace GameEngine::MEDIA
                 {
                     // Add Texture
                     std::pair<std::string, texture> tex = std::any_cast<std::pair<std::string, texture>>(data);
-                    renderer->add(tex.first, tex.second);
+                    engine->renderer->add(tex.first, tex.second);
                 }
                 break;
 
@@ -159,7 +129,7 @@ namespace GameEngine::MEDIA
                 {
                     // Draw Texture
                     auto [name, center, size, rotation] = std::any_cast<std::tuple<std::string, vec2, vec2, float>>(data);
-                    renderer->draw_texture(name, center, size, rotation);
+                    engine->renderer->draw_texture(name, center, size, rotation);
                 }
                 break;
 
@@ -167,28 +137,28 @@ namespace GameEngine::MEDIA
                 {
                     // Free Shader
                     std::string sh = std::any_cast<std::string>(data);
-                    renderer->free_shader(sh);
+                    engine->renderer->free_shader(sh);
                 }
 
                 case ACTION::FREE_TEXTURE:
                 {
                     // Free Texture
                     std::string tex = std::any_cast<std::string>(data);
-                    renderer->free_texture(tex);
+                    engine->renderer->free_texture(tex);
                 }
                 break;
                 }
             }
 
             // Update Screen
-            engine->running = renderer->update();
+            engine->running = engine->renderer->update();
             tasks.clear();
 
             if (engine->quit)
                 engine->running = false;
         }
 
-        renderer->clean();
+        engine->renderer->clean();
 
         // exit thread
         pthread_exit(nullptr);

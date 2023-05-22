@@ -17,7 +17,6 @@
 namespace GameEngine
 {
     // Main Game Engine (responsible for Managing Modules, Holding everything together)
-    template <typename RenderAPI>
     class GameEngine
     {
     public:
@@ -41,7 +40,7 @@ namespace GameEngine
         double now, deltaTime;
 
         // Media Engine
-        MEDIA::MediaEngine<RenderAPI> me;
+        MEDIA::MediaEngine me;
 
         vec2 cursor;
 

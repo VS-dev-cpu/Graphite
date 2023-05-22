@@ -65,16 +65,11 @@ namespace GameEngine::MEDIA
         // Destroy Media Engine
         ~MediaEngine();
 
-        // Start Media Engine
-        void start(bool multithreading = true);
-
-        // Wait for RenderThread and pass new list
+        // Sync With RenderThread & Update RenderQueue
         void update();
 
+        // Exit Render Loop
         void exit();
-
-        // Reset Renderer & Mixer
-        void reset();
 
         // Add Action to Queue
         void add(ACTION::ENUM action, RenderData data);
@@ -96,7 +91,9 @@ namespace GameEngine::MEDIA
         pthread_cond_t renderSignal = PTHREAD_COND_INITIALIZER;
 
         std::atomic<bool> drawable = false;
-        std::atomic<Renderer*> renderer;
+
+        Windower* windower;
+        Renderer* renderer;
 
         std::vector<RenderTask> renderQueue;
 

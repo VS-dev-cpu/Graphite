@@ -7,19 +7,11 @@
 
 namespace GameEngine::MEDIA
 {
-    enum GRAPHICS_API
-    {
-        OPENGL,
-        VULKAN,
-        DIRECTX,
-        METAL
-    };
-
     // Base Windower Struct
     struct Windower
     {
         // Initialize Windowing Library
-        virtual bool init(GRAPHICS_API api, std::string name, bool fullscreen, int width, int height) { return false; }
+        virtual bool init(std::string name, bool fullscreen, int width, int height) { return false; }
 
         // Clean Up / Destroy Windowing Library
         virtual bool clean() { return false; }

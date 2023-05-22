@@ -99,7 +99,7 @@ namespace GameEngine::MEDIA::WINDOWER
         {"f12", GLFW_KEY_F12},
     };
 
-    bool GLFW::init(GRAPHICS_API api, std::string name, bool fullscreen, int width, int height)
+    bool GLFW::init(std::string name, bool fullscreen, int width, int height)
     {
         if (isInit)
         {
@@ -108,20 +108,6 @@ namespace GameEngine::MEDIA::WINDOWER
         }
 
         glfwInit();
-
-        switch (api)
-        {
-        default:
-            LOG::ERROR("GLFW", "%s is not supported", api == DIRECTX ? "DirectX" : (api == METAL ? "Metal" : "Unknown"));
-            return isInit = false;
-            break;
-
-        case OPENGL:
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-            break;
-        }
 
         window = glfwCreateWindow(width, height, name.c_str(), nullptr, nullptr);
 
@@ -132,23 +118,18 @@ namespace GameEngine::MEDIA::WINDOWER
             return isInit = false;
         }
 
-        switch (api)
+        glfwMakeContextCurrent(window);
+
+        // Init OpenGL
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+            
+        // Load OpenGL
+        if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
         {
-        case OPENGL:
-            glfwMakeContextCurrent(window);
-
-            // Load OpenGL
-            if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-            {
-                LOG::ERROR("GLFW", "Failed to Initialize Renderer (OpenGL)");
-                return isInit = false;
-            }
-            break;
-
-        default:
-            LOG::ERROR("GLFW", "Unexpected Error");
+            LOG::ERROR("GLFW", "Failed to Initialize Renderer (OpenGL)");
             return isInit = false;
-            break;
         }
 
         glfwSetWindowUserPointer(window, this);

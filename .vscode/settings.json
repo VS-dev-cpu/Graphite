@@ -60,6 +60,10 @@
         "typeinfo": "cpp",
         "set": "cpp",
         "any": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "list": "cpp",
+        "unordered_set": "cpp",
+        "optional": "cpp",
+        "valarray": "cpp"
     }
 }

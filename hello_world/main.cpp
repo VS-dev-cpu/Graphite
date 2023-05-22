@@ -30,7 +30,7 @@ private:
 
 int main()
 {
-    GameEngine::GameEngine<GameEngine::MEDIA::RENDERER::OpenGL> engine("Hello World", false);
+    GameEngine::GameEngine engine("Hello World", false);
 
     engine.add(new Game());
 

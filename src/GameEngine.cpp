@@ -17,9 +17,6 @@ namespace GameEngine
     // Start Engine
     void GameEngine::start()
     {
-        // Start Render Thread Loop
-        me.start(MEDIA::OPENGL);
-
         // Initialize Modules
         for (auto module : modules)
             module->init();
