@@ -13,10 +13,9 @@ namespace GameEngine::MEDIA
         pthread_join(renderThread, NULL);
     }
 
-    void MediaEngine::start(GRAPHICS_API gAPI, bool multithreading)
+    void MediaEngine::start(bool multithreading)
     {
         running = true;
-        api = gAPI;
 
         // Try to create Render Thread
         int err = pthread_create(&renderThread, nullptr, &render, this);
@@ -41,10 +40,8 @@ namespace GameEngine::MEDIA
         quit = true;
     }
 
-    void MediaEngine::reset(GRAPHICS_API gAPI)
+    void MediaEngine::reset()
     {
-        api = gAPI;
-
         // Stop Threads
         running = false;
         pthread_join(renderThread, NULL);

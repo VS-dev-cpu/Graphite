@@ -66,7 +66,7 @@ namespace GameEngine::MEDIA
         ~MediaEngine();
 
         // Start Media Engine
-        void start(GRAPHICS_API gAPI = OPENGL, bool multithreading = true);
+        void start(bool multithreading = true);
 
         // Wait for RenderThread and pass new list
         void update();
@@ -74,7 +74,7 @@ namespace GameEngine::MEDIA
         void exit();
 
         // Reset Renderer & Mixer
-        void reset(GRAPHICS_API gAPI = OPENGL);
+        void reset();
 
         // Add Action to Queue
         void add(ACTION::ENUM action, RenderData data);
@@ -96,9 +96,9 @@ namespace GameEngine::MEDIA
         pthread_cond_t renderSignal = PTHREAD_COND_INITIALIZER;
 
         std::atomic<bool> drawable = false;
+        std::atomic<Renderer*> renderer;
 
         std::vector<RenderTask> renderQueue;
-        MEDIA::GRAPHICS_API api;
 
     private:
         static void *render(void *arg);
