@@ -1,7 +1,8 @@
 # Game-Engine
 ## Pre-Alpha Version
 
-> WARNING: The Current Version may be outdated & broken!
+> WARNING: The Current Version is a work in progress version!
+> With the first stable version, ill make a dev branch
 
 This Game-Engine will be a more code-oriented Engine than others, like [Unity](https://unity.com/), [Unreal](https://www.unrealengine.com/en-US) or [Godot](https://godotengine.org/)
 
