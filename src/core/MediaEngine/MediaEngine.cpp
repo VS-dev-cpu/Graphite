@@ -147,9 +147,6 @@ namespace GameEngine::MEDIA
                 }
             }
 
-            if (engine->windower->key("f11"))
-                engine->windower->fullscreen(!engine->windower->isFullscreen);
-
             // Update Screen
             engine->running = engine->renderer->update();
             tasks.clear();
