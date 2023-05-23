@@ -4,15 +4,14 @@ namespace GameEngine::MEDIA
 {
     MediaEngine::MediaEngine(std::string name, bool fullscreen, int width, int height) : name(name), fullscreen(fullscreen), width(width), height(height)
     {
+        // Initialize Windower & Renderer
         windower = new WINDOWER::GLFW;
         renderer = new RENDERER::OpenGL;
 
         running = true;
 
-        // Try to create Render Thread
-        int err = pthread_create(&renderThread, nullptr, &render, this);
-
-        if (err != 0)
+        // Initialize Render Thread
+        if (!pthread_create(&renderThread, nullptr, &render, this))
             LOG::ERROR("MediaEngine", "Render Thread Failed");
         else
             LOG::SYSTEM("MediaEngine", "Renderer Initialized");
@@ -55,9 +54,7 @@ namespace GameEngine::MEDIA
             LOG::ERROR("MediaEngine", "Failed to init Windower");
 
         // Initialize Renderer
-        engine->renderer->init(engine->windower);
-
-        if (!engine->renderer->isInit)
+        if (!engine->renderer->init(engine->windower))
             LOG::ERROR("MediaEngine", "Failed to init Renderer");
 
         // Main Render Loop
@@ -149,6 +146,9 @@ namespace GameEngine::MEDIA
                 break;
                 }
             }
+
+            if (engine->windower->key("f11"))
+                engine->windower->fullscreen(!engine->windower->isFullscreen);
 
             // Update Screen
             engine->running = engine->renderer->update();

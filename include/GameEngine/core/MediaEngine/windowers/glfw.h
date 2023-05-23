@@ -27,6 +27,9 @@ namespace GameEngine::MEDIA::WINDOWER
         // Update Window
         bool update();
 
+        // Set Fullscreen
+        bool fullscreen(bool en);
+
         // Get Keyboard State
         bool key(std::string k);
 
@@ -36,6 +39,8 @@ namespace GameEngine::MEDIA::WINDOWER
         // Window
         GLFWwindow *window = nullptr;
         GLFWmonitor *monitor = nullptr;
+
+        int small_size[2];
 
         // FrameBuffer Size Callback
         static void callback_resize(GLFWwindow *window, int w, int h)

@@ -99,7 +99,7 @@ namespace GameEngine::MEDIA::WINDOWER
         {"f12", GLFW_KEY_F12},
     };
 
-    bool GLFW::init(std::string name, bool fullscreen, int width, int height)
+    bool GLFW::init(std::string name, bool fullscreen_, int width, int height)
     {
         if (isInit)
         {
@@ -142,6 +142,8 @@ namespace GameEngine::MEDIA::WINDOWER
 
         glfwSwapInterval(0);
 
+        fullscreen(fullscreen_);
+
         return isInit = true;
     }
 
@@ -164,6 +166,24 @@ namespace GameEngine::MEDIA::WINDOWER
         glfwGetFramebufferSize(window, &width, &height);
 
         return !glfwWindowShouldClose(window);
+    }
+
+    bool GLFW::fullscreen(bool en)
+    {
+        GLFWmonitor* monitor = glfwGetWindowMonitor(window);
+        const GLFWvidmode* videoMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+
+        if (en)
+        {
+            small_size[0] = width;
+            small_size[1] = height;
+            glfwSetWindowMonitor(window, glfwGetPrimaryMonitor(), 0, 0, videoMode->width, videoMode->height, GLFW_DONT_CARE);
+
+        }
+        else
+            glfwSetWindowMonitor(window, nullptr, 0, 0, small_size[0], small_size[1], GLFW_DONT_CARE);
+
+        isFullscreen = en;
     }
 
     bool GLFW::key(std::string k)

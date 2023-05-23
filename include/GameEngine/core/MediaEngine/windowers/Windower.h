@@ -19,6 +19,9 @@ namespace GameEngine::MEDIA
         // Update Window
         virtual bool update() { return false; }
 
+        // Set Fullscreen
+        virtual bool fullscreen(bool en) { return false; }
+
         // Get Keyboard State
         virtual bool key(std::string k) { return false; }
 
@@ -33,6 +36,9 @@ namespace GameEngine::MEDIA
 
         // Is Library Init ?
         bool isInit = false;
+
+        // Is Fullscreened ?
+        bool isFullscreen = false;
     };
 
     // TODO: SDL2 Windower

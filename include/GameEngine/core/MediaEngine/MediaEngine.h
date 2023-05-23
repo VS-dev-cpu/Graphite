@@ -83,6 +83,7 @@ namespace GameEngine::MEDIA
         std::atomic<bool> running = false;
         std::atomic<bool> quit = false;
 
+        Windower* windower;
     private:
         // Render Thread
         pthread_t renderThread;
@@ -92,7 +93,6 @@ namespace GameEngine::MEDIA
 
         std::atomic<bool> drawable = false;
 
-        Windower* windower;
         Renderer* renderer;
 
         std::vector<RenderTask> renderQueue;
