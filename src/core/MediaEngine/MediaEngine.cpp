@@ -11,7 +11,7 @@ namespace GameEngine::MEDIA
         running = true;
 
         // Initialize Render Thread
-        if (!pthread_create(&renderThread, nullptr, &render, this))
+        if (pthread_create(&renderThread, nullptr, &render, this))
             LOG::ERROR("MediaEngine", "Render Thread Failed");
         else
             LOG::SYSTEM("MediaEngine", "Renderer Initialized");

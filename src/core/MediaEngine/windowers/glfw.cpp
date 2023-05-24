@@ -184,6 +184,8 @@ namespace GameEngine::MEDIA::WINDOWER
             glfwSetWindowMonitor(window, nullptr, 0, 0, small_size[0], small_size[1], GLFW_DONT_CARE);
 
         isFullscreen = en;
+
+        return true;
     }
 
     bool GLFW::key(std::string k)
