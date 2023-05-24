@@ -1,5 +1,4 @@
-#include <GameEngine/core/log.h>
-#include <chrono>
+#include <GameEngine/core/tools/log.h>
 
 namespace GameEngine
 {
@@ -10,7 +9,7 @@ namespace GameEngine
         clock_gettime(CLOCK_MONOTONIC, &res);
         return (1000.0 * res.tv_sec + (double)res.tv_nsec / 1e6) / 1000.0;
     }
-
+    
     // Get Current Timestamp
     std::string stime()
     {

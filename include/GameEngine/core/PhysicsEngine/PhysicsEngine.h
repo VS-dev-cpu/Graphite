@@ -4,7 +4,7 @@
 // https://www.reactphysics3d.com/documentation/manual/ReactPhysics3D-UserManual.pdf
 // hope it helps :)
 
-#include <GameEngine/core/log.h>
+#include <GameEngine/core/tools/log.h>
 
 #undef None // to avoid X11 API Conflicts
 #include <reactphysics3d/reactphysics3d.h>

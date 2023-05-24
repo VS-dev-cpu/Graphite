@@ -14,8 +14,11 @@ add_library(GameEngine
     src/GameEngine.cpp
 
     # -- Core --
-    src/core/log.cpp
+
     src/core/load.cpp
+    
+    # / tools
+    src/core/tools/log.cpp
 
     # / MediaEngine
     src/core/MediaEngine/MediaEngine.cpp

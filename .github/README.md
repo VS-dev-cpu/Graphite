@@ -18,14 +18,13 @@ It will...
 
 ... these are just my plans, it may (and probably will) change
 
-
 I also do [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw) about my progress, so check it out if you are interested!
 
 ## Usage
 
 ### Setup
 
-#### Linux
+#### Linux (Manjaro, Arch Based)
 
 1. Install (Build) Tools
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GameEngine/core/log.h>
+#include <GameEngine/core/tools/log.h>
 #include <GameEngine/types/base.h>
 
 // Mixers

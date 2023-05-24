@@ -3,13 +3,11 @@
 #include <stdio.h>
 #include <stdarg.h>
 
+#include <algorithm>
 #include <iomanip>
 #include <sstream>
-#include <ctime>
-
-#include <algorithm>
-
 #include <string>
+#include <ctime>
 
 namespace GameEngine
 {
