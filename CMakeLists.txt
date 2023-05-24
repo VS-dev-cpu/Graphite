@@ -7,6 +7,8 @@ set(CMAKE_PREFIX_PATH "/usr/lib;/usr/local/lib")
 find_package(ReactPhysics3D REQUIRED)
 find_package(glfw3 REQUIRED)
 
+include_directories(include)
+
 project(GameEngine)
 
 add_library(GameEngine
@@ -36,8 +38,6 @@ add_library(GameEngine
     src/utility/glad.c
     src/utility/stb_image.c
     )
-
-target_include_directories(GameEngine PUBLIC include)
 
 target_link_libraries(GameEngine ReactPhysics3D::ReactPhysics3D)
 target_link_libraries(GameEngine glfw)

@@ -10,7 +10,7 @@ I like to compare this engine to [Bevy](https://bevyengine.org/), as it will onl
 It will...
 - be modular (user-definable Renderer, Physics Engine, etc.)
 - target middle-tear hardware
-- support multiple Graphics APIs (OpenGL, Vulkan, DirectX) (CUSTOMIZABLE)
+- use OpenGL with GLFW (CUSTOMIZABLE)
 - support several Audio APIs (OpenAL, XAudio2, SDL Mixer) (CUSTOMIZABLE)
 - be scriptable in C++ and [Lua](https://www.lua.org/about.html) (CUSTOMIZABLE)
 - have cross-platform Support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com/))
