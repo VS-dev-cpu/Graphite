@@ -28,3 +28,22 @@ If you want to support me, you can subscribe on my channel, and you can also con
 here is [My Channel](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw), if you are interested in my project
 
 Thank you for reading it this far, see y'all in the next devlog!
+
+# Usage
+
+## Setup
+
+### Linux
+
+1. Install (Build) Tools
+> sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
+
+2. Clone the Repo
+> git clone https://github.com/VS-dev-cpu/Game-Engine
+
+3. Build Physics Engine
+> git clone https://github.com/DanielChappuis/reactphysics3d.git
+> cd reactphysics3d
+> cmake
+> make
+> sudo make install
