@@ -1,39 +1,31 @@
 # Game-Engine
 ## Pre-Alpha Version
-
 > WARNING: The Current Version is a work in progress version!
-> With the first stable version, ill make a dev branch
+> With the first stable version, i'll make a dev branch
 
-This Game-Engine will be a more code-oriented Engine than others, like [Unity](https://unity.com/), [Unreal](https://www.unrealengine.com/en-US) or [Godot](https://godotengine.org/)
+## About
 
-Just like Bevy to Rust,
-it will be a library for C++.
-
-At some point, it will have a GUI as well
+I like to compare this engine to [Bevy](https://bevyengine.org/), as it will only be a library for C++, but later i may as well make a GUI for it.
 
 It will...
-- be modular
+- be modular (user-definable Renderer, Physics Engine, etc.)
 - target middle-tear hardware
-- support multiple Graphics APIs (OpenGL, Vulkan, DirectX)
-- support several Audio APIs (OpenAL, XAudio2, SDL Mixer)
-- be scriptable in C++ and [Lua](https://www.lua.org/about.html)
-- have cross-platform Support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com))
-- use [ReactPhysics3D](https://reactphysics3d.com)
+- support multiple Graphics APIs (OpenGL, Vulkan, DirectX) (CUSTOMIZABLE)
+- support several Audio APIs (OpenAL, XAudio2, SDL Mixer) (CUSTOMIZABLE)
+- be scriptable in C++ and [Lua](https://www.lua.org/about.html) (CUSTOMIZABLE)
+- have cross-platform Support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com/))
+- use [ReactPhysics3D](https://reactphysics3d.com/) as a Physics Engine (CUSTOMIZABLE)
 
-... these are just my plans for it, but it may (and probably will) change
-I also run a YouTube channel where I post devlogs about the engine, there you can get the latest news about it's state.
+... these are just my plans, it may (and probably will) change
 
-If you want to support me, you can subscribe on my channel, and you can also consider being my patreon, but even just a comment is more support than you think!
 
-here is [My Channel](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw), if you are interested in my project
+I also do [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw) about my progress, so check it out if you are interested!
 
-Thank you for reading it this far, see y'all in the next devlog!
+## Usage
 
-# Usage
+### Setup
 
-## Setup
-
-### Linux
+#### Linux
 
 1. Install (Build) Tools
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
@@ -43,7 +35,11 @@ Thank you for reading it this far, see y'all in the next devlog!
 
 3. Build Physics Engine
 > git clone https://github.com/DanielChappuis/reactphysics3d.git
+
 > cd reactphysics3d
+
 > cmake
+
 > make
+
 > sudo make install
