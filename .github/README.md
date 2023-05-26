@@ -3,6 +3,8 @@
 > WARNING: The Current Version is a work in progress version!
 > With the first stable version, i'll make a dev branch
 
+> It will probably called "[Graphite](https://en.wikipedia.org/wiki/Graphite)", but there's an issue where suggestions are welcome!
+
 ## About
 
 I like to compare this engine to [Bevy](https://bevyengine.org/), as it will only be a library for C++, but later i may as well make a GUI for it.
