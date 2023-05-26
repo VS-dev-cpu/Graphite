@@ -1,3 +1,4 @@
 [submodule "Artifex"]
 	path = Artifex
 	url = https://github.com/VS-dev-cpu/Artifex.git
+	branch = carbon
