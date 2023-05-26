@@ -1,4 +1,0 @@
-project(gameengine_hello_world)
-
-add_executable(gameengine_hello_world main.cpp)
-target_link_libraries(gameengine_hello_world GameEngine)
