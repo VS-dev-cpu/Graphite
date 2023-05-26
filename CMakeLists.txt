@@ -5,9 +5,10 @@ cmake_minimum_required(VERSION 3.8)
 set(CMAKE_PREFIX_PATH "/usr/lib;/usr/local/lib")
 
 find_package(ReactPhysics3D REQUIRED)
-find_package(glfw3 REQUIRED)
+add_subdirectory(Artifex)
 
-include_directories(include)
+include_directories("include" "Artifex/include")
+link_libraries(Artifex ReactPhysics3D::ReactPhysics3D)
 
 project(GameEngine)
 
@@ -18,7 +19,7 @@ add_library(GameEngine
     # -- Core --
 
     src/core/load.cpp
-    
+
     # / tools
     src/core/tools/log.cpp
 
@@ -30,16 +31,13 @@ add_library(GameEngine
 
     # > / renderers
     src/core/MediaEngine/renderers/OpenGL.cpp
-    
+
     # / PhysicsEngine
     src/core/PhysicsEngine/PhysicsEngine.cpp
 
     # -- Utility --
     src/utility/glad.c
     src/utility/stb_image.c
-    )
-
-target_link_libraries(GameEngine ReactPhysics3D::ReactPhysics3D)
-target_link_libraries(GameEngine glfw)
+)
 
 add_subdirectory(hello_world)
