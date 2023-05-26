@@ -1,9 +1,9 @@
-# Game-Engine
+# Graphite
 ## Pre-Alpha Version
 > WARNING: The Current Version is a work in progress version!
 > With the first stable version, i'll make a dev branch
 
-> It will probably called "[Graphite](https://en.wikipedia.org/wiki/Graphite)", but you can suggest other ones [here](https://github.com/VS-dev-cpu/Game-Engine/issues/2)
+> [Graphite](https://en.wikipedia.org/wiki/Graphite) is a temporary name, you can suggest other ones [here](https://github.com/VS-dev-cpu/Game-Engine/issues/2)
 
 ## About
 
@@ -31,7 +31,7 @@ I also make [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
 
 2. Clone the Repo
-> git clone https://github.com/VS-dev-cpu/Game-Engine
+> git clone https://github.com/VS-dev-cpu/Graphite
 
 3. Build Physics Engine
 > git clone https://github.com/DanielChappuis/reactphysics3d.git
