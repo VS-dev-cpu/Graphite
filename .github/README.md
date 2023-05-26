@@ -10,19 +10,18 @@
 I like to compare this engine to [Bevy](https://bevyengine.org/), as it will only be a library for C++, but later i may as well make a GUI for it.
 
 It will...
-- be modular (user-definable Renderer, Physics Engine, etc.)
+- use the [Artifex](https://github.com/VS-dev-cpu/Artifex) 2D Engine for Rendering
+- be modular (everything is scriptable)
 - target middle-tear hardware
-- use OpenGL with GLFW (CUSTOMIZABLE)
-- support several Audio APIs (OpenAL, XAudio2, SDL Mixer) (CUSTOMIZABLE)
-- be scriptable in C++ and [Lua](https://www.lua.org/about.html) (CUSTOMIZABLE)
+- be scriptable in C++ and [Lua](https://www.lua.org/about.html) (and Custom Script Modules)
 - have cross-platform Support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com/))
-- use [ReactPhysics3D](https://reactphysics3d.com/) as a Physics Engine (CUSTOMIZABLE)
+- use [ReactPhysics3D](https://reactphysics3d.com/) as a Physics Engine (or other)
 
-... these are just my plans, it may (and probably will) change
+... these are just plans, they may (and probably will) change
 
-I also do [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw) about my progress, so check it out if you are interested!
+I also make [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw) about my progress, so check it out if you are interested!
 
-## Usage
+## Documentation
 
 ### Setup
 
@@ -44,3 +43,22 @@ I also do [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DU
 > make
 
 > sudo make install
+
+#### Windows
+
+Coming Later!
+
+#### MacOS
+
+I don't own a Mac Device, but if you do and want to make support for it, please contact me (or make a pull request)!
+
+### Usage
+
+Coming Soon!
+
+## License
+
+This Project is licensed under the [zlib License](https://opensource.org/license/zlib-license-php/)
+
+It is free-to-use, modify and/or use commercially
+(this means, for example you can make a game with this engine and put it on Steam without having to pay me anything or open-source the game)
