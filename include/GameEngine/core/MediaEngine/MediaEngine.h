@@ -3,16 +3,6 @@
 #include <GameEngine/core/tools/log.h>
 #include <GameEngine/types/base.h>
 
-// Mixers
-#include <GameEngine/core/MediaEngine/mixers/Mixer.h>
-#include <GameEngine/core/MediaEngine/mixers/OpenAL.h>
-
-// Windowers
-#include <GameEngine/core/MediaEngine/windowers/glfw.h>
-
-// Renderers
-#include <GameEngine/core/MediaEngine/renderers/OpenGL.h>
-
 #include <any>
 #include <atomic>
 #include <tuple>

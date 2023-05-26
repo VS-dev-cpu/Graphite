@@ -6,55 +6,54 @@
 
 #include <GameEngine/types/module.h>
 
-// Include Renderers
 #include <GameEngine/core/MediaEngine/MediaEngine.h>
 
+#include <any>
+#include <map>
 #include <pthread.h>
 #include <vector>
-#include <map>
-#include <any>
 
-namespace GameEngine
-{
-    // Main Game Engine (responsible for Managing Modules, Holding everything together)
-    class GameEngine
-    {
-    public:
-        // Initialize Game Engine
-        GameEngine(std::string name = "GameEngine::GameEngine", bool fullscreen = true, int width = 720, int height = 480);
+namespace GameEngine {
+// Main Game Engine (responsible for Managing Modules, Holding everything
+// together)
+class GameEngine {
+  public:
+    // Initialize Game Engine
+    GameEngine(std::string name = "GameEngine::GameEngine",
+               bool fullscreen = true, int width = 720, int height = 480);
 
-        // Destroy Game Engine
-        ~GameEngine();
+    // Destroy Game Engine
+    ~GameEngine();
 
-        // Start Main Game Loop
-        void start();
+    // Start Main Game Loop
+    void start();
 
-        // Get Key State
-        bool key(std::string k);
+    // Get Key State
+    bool key(std::string k);
 
-        // Add Module (Script)
-        uint add(Module *module);
+    // Add Module (Script)
+    uint add(Module *module);
 
-    public:
-        // Main Thread Timing
-        double now, deltaTime;
+  public:
+    // Main Thread Timing
+    double now, deltaTime;
 
-        // Media Engine
-        MEDIA::MediaEngine me;
+    // Media Engine
+    MEDIA::MediaEngine me;
 
-        vec2 cursor;
+    vec2 cursor;
 
-    private:
-        // Main Physics Engine
-        Physics physics;
+  private:
+    // Main Physics Engine
+    Physics physics;
 
-        // Engine Flags
-        bool running = false;  // is Engine Running ?
-        bool quit = false;     // should quit ?
-        bool drawable = false; // Has New Drawable Content ?
+    // Engine Flags
+    bool running = false;  // is Engine Running ?
+    bool quit = false;     // should quit ?
+    bool drawable = false; // Has New Drawable Content ?
 
-        std::vector<Module *> modules; // Modules
+    std::vector<Module *> modules; // Modules
 
-    private:
-    };
-}
+  private:
+};
+} // namespace GameEngine

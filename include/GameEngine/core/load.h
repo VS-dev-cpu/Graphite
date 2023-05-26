@@ -4,22 +4,21 @@
 
 #include <GameEngine/types/base.h>
 
-#include <GameEngine/utility/stb_image.h>
+#include <GL/stb_image.h>
 
-namespace GameEngine
-{
-    namespace LOAD
-    {
-        // Text / String
-        std::string Text(std::string path, std::string ext = "");
+namespace GameEngine {
+namespace LOAD {
+// Text / String
+std::string Text(std::string path, std::string ext = "");
 
-        // Load Image
-        texture Image(std::string path);
+// Load Image
+texture Image(std::string path);
 
-        // Load Shader
-        shader Shader(std::string vertex_path, std::string fragment_path, std::string geometry_path = "");
+// Load Shader
+shader Shader(std::string vertex_path, std::string fragment_path,
+              std::string geometry_path = "");
 
-        // Load Mesh
-        mesh Mesh(std::string path);
-    }
-}
+// Load Mesh
+mesh Mesh(std::string path);
+} // namespace LOAD
+} // namespace GameEngine
