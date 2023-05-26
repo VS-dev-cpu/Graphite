@@ -65,6 +65,8 @@ void *MediaEngine::render(void *arg) {
                 // Do Nothing
             } break;
 
+                // Basic Management
+
             case ACTION::SLEEP: {
                 // Sleep
                 float amount = std::any_cast<float>(data);
@@ -79,11 +81,21 @@ void *MediaEngine::render(void *arg) {
                 LOG::DEBUG("RenderQueue", str.c_str());
             } break;
 
-            case ACTION::CLEAR: {
-                // Clear Screen
-                vec3 color = std::any_cast<vec3>(data);
-                ax.clear(color.x, color.y, color.z);
+                // Window Management
+
+            case ACTION::SET_FULLSCREEN: {
+                // Make Window Fullscreen
+                bool en = std::any_cast<bool>(data);
+                ax.fullscreen(en);
+            }
+
+            case ACTION::SET_VSYNC: {
+                // Set VSync Level
+                int level = std::any_cast<int>(data);
+                ax.vsync(level);
             } break;
+
+                // Resource Managing
 
             case ACTION::ADD_SHADER: {
                 // Add Shader
@@ -101,24 +113,20 @@ void *MediaEngine::render(void *arg) {
                            tex.second.nrChannels);
             } break;
 
+                // Rendering
+
+            case ACTION::CLEAR: {
+                // Clear Screen
+                vec3 color = std::any_cast<vec3>(data);
+                ax.clear(color.x, color.y, color.z);
+            } break;
+
             case ACTION::DRAW_TEXTURE: {
                 // Draw Texture
                 auto [name, center, size, rotation] =
                     std::any_cast<std::tuple<std::string, vec2, vec2, float>>(
                         data);
                 // TODO: Draw Texture
-            } break;
-
-            case ACTION::FREE_SHADER: {
-                // Free Shader
-                std::string sh = std::any_cast<std::string>(data);
-                // Remove
-            }
-
-            case ACTION::FREE_TEXTURE: {
-                // Free Texture
-                std::string tex = std::any_cast<std::string>(data);
-                // Remove
             } break;
             }
         }

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 
 #set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O3 -Wall")
 
-set(CMAKE_PREFIX_PATH "/usr/lib;/usr/local/lib")
+#set(CMAKE_PREFIX_PATH "/usr/lib;/usr/local/lib")
 
 find_package(ReactPhysics3D REQUIRED)
 add_subdirectory(Artifex)
