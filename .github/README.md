@@ -3,7 +3,7 @@
 > WARNING: The Current Version is a work in progress version!
 > With the first stable version, i'll make a dev branch
 
-> It will probably called "[Graphite](https://en.wikipedia.org/wiki/Graphite)", but there's an issue where suggestions are welcome!
+> It will probably called "[Graphite](https://en.wikipedia.org/wiki/Graphite)", but you can suggest other ones at #2
 
 ## About
 
