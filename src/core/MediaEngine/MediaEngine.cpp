@@ -97,7 +97,8 @@ void *MediaEngine::render(void *arg) {
                 // Add Texture
                 std::pair<std::string, texture> tex =
                     std::any_cast<std::pair<std::string, texture>>(data);
-                engine->renderer->add(tex.first, tex.second);
+                ax.texture(tex.second.data, tex.second.width, tex.second.height,
+                           tex.second.nrChannels);
             } break;
 
             case ACTION::DRAW_TEXTURE: {
@@ -105,32 +106,30 @@ void *MediaEngine::render(void *arg) {
                 auto [name, center, size, rotation] =
                     std::any_cast<std::tuple<std::string, vec2, vec2, float>>(
                         data);
-                engine->renderer->draw_texture(name, center, size, rotation);
+                // TODO: Draw Texture
             } break;
 
             case ACTION::FREE_SHADER: {
                 // Free Shader
                 std::string sh = std::any_cast<std::string>(data);
-                engine->renderer->free_shader(sh);
+                // Remove
             }
 
             case ACTION::FREE_TEXTURE: {
                 // Free Texture
                 std::string tex = std::any_cast<std::string>(data);
-                engine->renderer->free_texture(tex);
+                // Remove
             } break;
             }
         }
 
         // Update Screen
-        engine->running = engine->renderer->update();
+        engine->running = ax.update();
         tasks.clear();
 
         if (engine->quit)
             engine->running = false;
     }
-
-    engine->renderer->clean();
 
     // exit thread
     pthread_exit(nullptr);
