@@ -21,6 +21,12 @@ It will...
 
 I also make [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0DUEnmw) about my progress, so check it out if you are interested!
 
+I use [Visual Studio Codium](https://vscodium.com/) with the following extensions: [clangd](https://open-vsx.org/extension/llvm-vs-code-extensions/vscode-clangd), [CMake](https://open-vsx.org/extension/twxs/cmake), [CMake IntelliSense](https://open-vsx.org/extension/KylinIdeTeam/cmake-intellisence), [CMake Tools](https://open-vsx.org/extension/ms-vscode/cmake-tools), [Todo Tree](https://open-vsx.org/vscode/item?itemName=Gruntfuggly.todo-tree)
+
+## Features
+- [ ] Basic 3D Rendering
+> this is a todo!
+
 ## Documentation
 
 ### Setup
@@ -50,7 +56,7 @@ Coming Later!
 
 #### MacOS
 
-I don't own a Mac Device, but if you do and want to make support for it, please contact me (or make a pull request)!
+I don't own a Mac Device, but if you do and want to make support for it, please contact me!
 
 ### Usage
 
@@ -59,6 +65,3 @@ Coming Soon!
 ## License
 
 This Project is licensed under the [zlib License](https://opensource.org/license/zlib-license-php/)
-
-It is free-to-use, modify and/or use commercially
-(this means, for example you can make a game with this engine and put it on Steam without having to pay me anything or open-source the game)
