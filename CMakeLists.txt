@@ -22,4 +22,4 @@ add_library(GameEngine
     src/log.cpp
 )
 
-add_subdirectory(hello_world)
+add_subdirectory(hello_graphite)

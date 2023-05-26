@@ -17,7 +17,7 @@ class Game : public GameEngine::Module {
     }
 
     void update(float deltaTime) {
-        printf("fps: %f\n", 1.0f / deltaTime);
+        // printf("fps: %f\n", 1.0f / deltaTime);
         engine->me.add(GameEngine::MEDIA::ACTION::CLEAR,
                        GameEngine::vec3(1.0f, 0.4f, 0.0f));
         engine->me.add(
