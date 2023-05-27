@@ -6,7 +6,7 @@
 
 #include <Graphite/types/module.h>
 
-#include <Graphite/core/MediaEngine/MediaEngine.h>
+#include <Graphite/core/Media.h>
 
 #include <any>
 #include <map>
@@ -38,7 +38,7 @@ class Engine {
     double now, deltaTime;
 
     // Media Engine
-    MEDIA::MediaEngine me;
+    Media::Media me;
 
     vec2 cursor;
 

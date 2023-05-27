@@ -1,9 +1,8 @@
 #include <Artifex/Artifex.h>
-#include <Graphite/core/MediaEngine/MediaEngine.h>
+#include <Graphite/core/Media.h>
 
-namespace Graphite::MEDIA {
-MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
-                         int height)
+namespace Graphite::Media {
+Media::Media(std::string name, bool fullscreen, int width, int height)
     : name(name), fullscreen(fullscreen), width(width), height(height) {
     // Initialize Windower & Renderer
     // windower = new WINDOWER::GLFW;
@@ -13,18 +12,18 @@ MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
 
     // Initialize Render Thread
     if (pthread_create(&renderThread, nullptr, &render, this))
-        LOG::ERROR("MediaEngine", "Render Thread Failed");
+        LOG::ERROR("Media", "Render Thread Failed");
     else
-        LOG::SYSTEM("MediaEngine", "Renderer Initialized");
+        LOG::SYSTEM("Media", "Renderer Initialized");
 }
 
-MediaEngine::~MediaEngine() {
+Media::~Media() {
     // Stop Threads
     running = false;
     pthread_join(renderThread, NULL);
 }
 
-void MediaEngine::update() {
+void Media::update() {
     drawable = true;
     while (drawable && running && !quit)
         ;
@@ -32,15 +31,15 @@ void MediaEngine::update() {
     renderQueue.clear();
 }
 
-void MediaEngine::exit() { quit = true; }
+void Media::exit() { quit = true; }
 
-void MediaEngine::add(ACTION::ENUM action, RenderData data) {
+void Media::add(ACTION action, RenderData data) {
     renderQueue.push_back(RenderTask(action, data));
 }
 
-void *MediaEngine::render(void *arg) {
+void *Media::render(void *arg) {
     // Detach Thread
-    MediaEngine *engine = (MediaEngine *)arg;
+    Media *engine = (Media *)arg;
     pthread_detach(pthread_self());
 
     // Initialize Renderer
@@ -143,4 +142,4 @@ void *MediaEngine::render(void *arg) {
     pthread_exit(nullptr);
     return nullptr;
 }
-} // namespace Graphite::MEDIA
+} // namespace Graphite::Media

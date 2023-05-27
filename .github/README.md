@@ -23,10 +23,6 @@ I also make [Youtube Devlogs](https://www.youtube.com/channel/UCR8z9TUZnUDvs0XR0
 
 I use [Visual Studio Codium](https://vscodium.com/) with the following extensions: [clangd](https://open-vsx.org/extension/llvm-vs-code-extensions/vscode-clangd), [CMake](https://open-vsx.org/extension/twxs/cmake), [CMake IntelliSense](https://open-vsx.org/extension/KylinIdeTeam/cmake-intellisence), [CMake Tools](https://open-vsx.org/extension/ms-vscode/cmake-tools), [Todo Tree](https://open-vsx.org/vscode/item?itemName=Gruntfuggly.todo-tree)
 
-## Features
-- [ ] Basic 3D Rendering
-> this is a todo!
-
 ## Documentation
 
 ### Setup

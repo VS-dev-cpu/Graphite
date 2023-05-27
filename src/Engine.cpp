@@ -13,7 +13,7 @@ Engine::~Engine() { LOG::SYSTEM("GameEngine", "Destroyed"); }
 // Start Engine
 void Engine::start() {
     // Initialize Modules
-    for (auto module : modules)
+    for (Module *module : modules)
         module->init();
 
     LOG::SYSTEM("GameEngine", "Started Successfully");
@@ -29,7 +29,7 @@ void Engine::start() {
         double start = time(); // [MainTime] Start
 
         // Update Modules
-        for (auto module : modules)
+        for (Module *module : modules)
             module->update(deltaTime);
 
         // Update Render Queue

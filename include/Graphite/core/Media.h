@@ -9,12 +9,10 @@
 #include <variant>
 #include <vector>
 
-namespace Graphite::MEDIA {
-class GameEngine;
+namespace Graphite::Media {
 
 // RenderQueue Action
-namespace ACTION {
-enum ENUM {
+enum ACTION {
     // Basic Management
     PASS,  // Do Nothing [TM] (void)
     SLEEP, // Sleep Some Time (float)
@@ -36,20 +34,19 @@ enum ENUM {
 
     // TODO: Add More Functions
 };
-}
 
 typedef std::any RenderData;
-typedef std::pair<ACTION::ENUM, RenderData> RenderTask;
+typedef std::pair<ACTION, RenderData> RenderTask;
 
 //  The Media Engine (responsible for Windowing, Rendering and Audio)
-class MediaEngine {
+class Media {
   public:
     // Initialize Media Engine
-    MediaEngine(std::string name = "MediaEngine", bool fullscreen = true,
-                int width = 720, int height = 480);
+    Media(std::string name = "Graphite::Media", bool fullscreen = true,
+          int width = 720, int height = 480);
 
     // Destroy Media Engine
-    ~MediaEngine();
+    ~Media();
 
     // Sync With RenderThread & Update RenderQueue
     void update();
@@ -58,7 +55,7 @@ class MediaEngine {
     void exit();
 
     // Add Action to Queue
-    void add(ACTION::ENUM action, RenderData data);
+    void add(ACTION action, RenderData data);
 
   public:
     // Window Properties
@@ -86,4 +83,4 @@ class MediaEngine {
   private:
     static void *render(void *arg);
 };
-} // namespace Graphite::MEDIA
+} // namespace Graphite::Media
