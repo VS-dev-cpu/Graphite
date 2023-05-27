@@ -1,42 +1,42 @@
-#include <GameEngine/GameEngine.h>
-#include <GameEngine/core/load.h>
+#include <Graphite/Engine.h>
+#include <Graphite/core/load.h>
 #include <iostream>
 
 using namespace std;
 
-class Game : public GameEngine::Module {
+class Game : public Graphite::Module {
   public:
-    // TODO: Easier 2D Renderer (direct-access or wrapper)
+    // TODO: Better 2D UI Support
     void init() {
-        GameEngine::LOG::DEBUG("GameModule", "Hello");
-        engine->me.add(GameEngine::MEDIA::ACTION::PRINT, (std::string) "Hello");
+        Graphite::LOG::DEBUG("GameModule", "Hello");
+        engine->me.add(Graphite::MEDIA::ACTION::PRINT, (std::string) "Hello");
 
-        tex = GameEngine::LOAD::Image("res/milk.png");
-        engine->me.add(GameEngine::MEDIA::ACTION::ADD_TEXTURE,
-                       std::pair<std::string, GameEngine::texture>("tex", tex));
+        tex = Graphite::LOAD::Image("res/milk.png");
+        engine->me.add(Graphite::MEDIA::ACTION::ADD_TEXTURE,
+                       std::pair<std::string, Graphite::texture>("tex", tex));
     }
 
     void update(float deltaTime) {
         // printf("fps: %f\n", 1.0f / deltaTime);
-        engine->me.add(GameEngine::MEDIA::ACTION::CLEAR,
-                       GameEngine::vec3(1.0f, 0.4f, 0.0f));
+        engine->me.add(Graphite::MEDIA::ACTION::CLEAR,
+                       Graphite::vec3(1.0f, 0.4f, 0.0f));
         engine->me.add(
-            GameEngine::MEDIA::ACTION::DRAW_TEXTURE,
-            std::tuple<std::string, GameEngine::vec2, GameEngine::vec2, float>(
-                "tex", GameEngine::vec2(0.0f, 0.0f),
-                GameEngine::vec2(0.5f, 0.5f), GameEngine::time() * 90.0f));
+            Graphite::MEDIA::ACTION::DRAW_TEXTURE,
+            std::tuple<std::string, Graphite::vec2, Graphite::vec2, float>(
+                "tex", Graphite::vec2(0.0f, 0.0f), Graphite::vec2(0.5f, 0.5f),
+                Graphite::time() * 90.0f));
     }
 
   private:
-    GameEngine::texture tex;
+    Graphite::texture tex;
 };
 
 int main() {
-    GameEngine::GameEngine engine("Hello Graphite", false);
+    Graphite::Engine engine("Hello Graphite", false);
 
     engine.add(new Game());
 
-    GameEngine::LOG::DEBUG("Main", "Hello");
+    Graphite::LOG::DEBUG("Main", "Hello");
 
     engine.start();
 

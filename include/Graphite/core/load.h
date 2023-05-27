@@ -1,12 +1,12 @@
 #pragma once
 
-#include <GameEngine/core/tools/log.h>
+#include <Graphite/core/log.h>
 
-#include <GameEngine/types/base.h>
+#include <Graphite/types/base.h>
 
 #include <GL/stb_image.h>
 
-namespace GameEngine {
+namespace Graphite {
 namespace LOAD {
 // Text / String
 std::string Text(std::string path, std::string ext = "");
@@ -21,4 +21,4 @@ shader Shader(std::string vertex_path, std::string fragment_path,
 // Load Mesh
 mesh Mesh(std::string path);
 } // namespace LOAD
-} // namespace GameEngine
+} // namespace Graphite

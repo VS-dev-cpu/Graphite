@@ -1,7 +1,7 @@
 #pragma once
 
-#include <GameEngine/core/tools/log.h>
-#include <GameEngine/types/base.h>
+#include <Graphite/core/log.h>
+#include <Graphite/types/base.h>
 
 #include <any>
 #include <atomic>
@@ -9,7 +9,7 @@
 #include <variant>
 #include <vector>
 
-namespace GameEngine::MEDIA {
+namespace Graphite::MEDIA {
 class GameEngine;
 
 // RenderQueue Action
@@ -86,4 +86,4 @@ class MediaEngine {
   private:
     static void *render(void *arg);
 };
-} // namespace GameEngine::MEDIA
+} // namespace Graphite::MEDIA

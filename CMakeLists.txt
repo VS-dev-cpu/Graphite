@@ -10,10 +10,10 @@ add_subdirectory(Artifex)
 include_directories("include" "Artifex/include")
 link_libraries(Artifex ReactPhysics3D::ReactPhysics3D)
 
-project(GameEngine)
+project(Graphite)
 
-add_library(GameEngine
-    src/GameEngine.cpp
+add_library(Graphite
+    src/Engine.cpp
 
     src/MediaEngine.cpp
     src/PhysicsEngine.cpp

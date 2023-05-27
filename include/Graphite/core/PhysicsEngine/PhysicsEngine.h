@@ -4,7 +4,7 @@
 // https://www.reactphysics3d.com/documentation/manual/ReactPhysics3D-UserManual.pdf
 // hope it helps :)
 
-#include <GameEngine/core/tools/log.h>
+#include <Graphite/core/log.h>
 
 #undef None // to avoid X11 API Conflicts
 #include <reactphysics3d/reactphysics3d.h>
@@ -13,9 +13,8 @@ using namespace reactphysics3d;
 #include <vector>
 
 // Wrapper for the ReactPhysics3D Physics Engine
-class Physics
-{
-public:
+class Physics {
+  public:
     Physics();
     ~Physics();
 
@@ -23,21 +22,20 @@ public:
 
     int addRigidBody();
 
-public:
+  public:
     float now;
     PhysicsWorld *world = nullptr;
 
     std::vector<RigidBody *> rigidbody;
 
-private:
+  private:
     PhysicsCommon common;
 
     float past;
 
-private:
+  private:
     // Return Time in Milliseconds
-    float time()
-    {
+    float time() {
         struct timespec res;
         clock_gettime(CLOCK_MONOTONIC, &res);
         return (1000.0f * res.tv_sec + (float)res.tv_nsec / 1e6) / 1000.0f;

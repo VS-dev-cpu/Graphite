@@ -1,7 +1,6 @@
-#include <GameEngine/core/PhysicsEngine/PhysicsEngine.h>
+#include <Graphite/core/PhysicsEngine/PhysicsEngine.h>
 
-Physics::Physics()
-{
+Physics::Physics() {
     // TODO: Ability to change settings on init
     PhysicsWorld::WorldSettings settings;
     settings.isSleepingEnabled = true;
@@ -12,13 +11,9 @@ Physics::Physics()
     past = now = time();
 }
 
-Physics::~Physics()
-{
-    common.destroyPhysicsWorld(world);
-}
+Physics::~Physics() { common.destroyPhysicsWorld(world); }
 
-void Physics::update()
-{
+void Physics::update() {
     past = now;
     now = time();
     float deltaTime = now - past;
@@ -26,8 +21,7 @@ void Physics::update()
     world->update(deltaTime);
 }
 
-int Physics::addRigidBody()
-{
+int Physics::addRigidBody() {
     Vector3 position(0.0, 3.0, 0.0);
     Quaternion orientation = Quaternion::identity();
     Transform transform(position, orientation);

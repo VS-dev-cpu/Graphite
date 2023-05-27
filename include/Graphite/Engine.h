@@ -1,29 +1,28 @@
 #pragma once
 
-#include <GameEngine/core/tools/log.h>
+#include <Graphite/core/log.h>
 
-#include <GameEngine/core/PhysicsEngine/PhysicsEngine.h>
+#include <Graphite/core/PhysicsEngine/PhysicsEngine.h>
 
-#include <GameEngine/types/module.h>
+#include <Graphite/types/module.h>
 
-#include <GameEngine/core/MediaEngine/MediaEngine.h>
+#include <Graphite/core/MediaEngine/MediaEngine.h>
 
 #include <any>
 #include <map>
 #include <pthread.h>
 #include <vector>
 
-namespace GameEngine {
-// Main Game Engine (responsible for Managing Modules, Holding everything
-// together)
-class GameEngine {
+namespace Graphite {
+
+class Engine {
   public:
     // Initialize Game Engine
-    GameEngine(std::string name = "GameEngine::GameEngine",
-               bool fullscreen = true, int width = 720, int height = 480);
+    Engine(std::string name = "Graphite::Engine", bool fullscreen = true,
+           int width = 720, int height = 480);
 
     // Destroy Game Engine
-    ~GameEngine();
+    ~Engine();
 
     // Start Main Game Loop
     void start();
@@ -56,4 +55,4 @@ class GameEngine {
 
   private:
 };
-} // namespace GameEngine
+} // namespace Graphite

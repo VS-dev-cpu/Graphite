@@ -1,7 +1,7 @@
-#include "Artifex/Artifex.h"
-#include <GameEngine/core/MediaEngine/MediaEngine.h>
+#include <Artifex/Artifex.h>
+#include <Graphite/core/MediaEngine/MediaEngine.h>
 
-namespace GameEngine::MEDIA {
+namespace Graphite::MEDIA {
 MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
                          int height)
     : name(name), fullscreen(fullscreen), width(width), height(height) {
@@ -143,4 +143,4 @@ void *MediaEngine::render(void *arg) {
     pthread_exit(nullptr);
     return nullptr;
 }
-} // namespace GameEngine::MEDIA
+} // namespace Graphite::MEDIA
