@@ -64,6 +64,6 @@
         "list": "cpp",
         "unordered_set": "cpp",
         "optional": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
     }
 }
