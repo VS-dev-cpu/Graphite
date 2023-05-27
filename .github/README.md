@@ -36,8 +36,8 @@ I use [Visual Studio Codium](https://vscodium.com/) with the following extension
 1. Install (Build) Tools
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
 
-2. Clone the Repo
-> git clone https://github.com/VS-dev-cpu/Graphite
+2. Clone the Repo (with submodule)
+> git clone --recurse-submodules https://github.com/VS-dev-cpu/Graphite
 
 3. Build Physics Engine
 > git clone https://github.com/DanielChappuis/reactphysics3d.git
@@ -56,7 +56,7 @@ Coming Later!
 
 #### MacOS
 
-I don't own a Mac Device, but if you do and want to make support for it, please contact me!
+I don't own a Mac Device, but if you do and want to help me out, contact me!
 
 ### Usage
 
