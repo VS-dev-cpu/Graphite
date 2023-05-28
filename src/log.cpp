@@ -2,14 +2,12 @@
 
 namespace Graphite {
 
-// Return Time in Seconds
 double time() {
     struct timespec res;
     clock_gettime(CLOCK_MONOTONIC, &res);
     return (1000.0 * res.tv_sec + (double)res.tv_nsec / 1e6) / 1000.0;
 }
 
-// Get Current Timestamp
 std::string stime() {
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
@@ -25,12 +23,10 @@ std::string stime() {
     return time.c_str();
 }
 
-// Logging Functions
 namespace LOG {
 int max = 12;
 int c = 0;
 
-// Print a Custom Log
 void CUSTOM(char type, std::string whereami, std::string message,
             va_list args) {
     if ((int)whereami.length() > max) {
@@ -54,7 +50,6 @@ void CUSTOM(char type, std::string whereami, std::string message,
             args);
 }
 
-// Print a Custom Log
 void CUSTOM(char type, std::string whereami, std::string message, ...) {
     va_list args;
     va_start(args, message);
@@ -64,7 +59,6 @@ void CUSTOM(char type, std::string whereami, std::string message, ...) {
     va_end(args);
 }
 
-// Print a System Message
 void SYSTEM(std::string whereami, std::string message, ...) {
     va_list args;
     va_start(args, message);
@@ -74,7 +68,6 @@ void SYSTEM(std::string whereami, std::string message, ...) {
     va_end(args);
 }
 
-// Print a Debug Message
 void DEBUG(std::string whereami, std::string message, ...) {
     va_list args;
     va_start(args, message);
@@ -84,7 +77,6 @@ void DEBUG(std::string whereami, std::string message, ...) {
     va_end(args);
 }
 
-// Print a Warning Message
 void WARNING(std::string whereami, std::string message, ...) {
     va_list args;
     va_start(args, message);
@@ -94,7 +86,6 @@ void WARNING(std::string whereami, std::string message, ...) {
     va_end(args);
 }
 
-// Print an Error Message
 void ERROR(std::string whereami, std::string message, ...) {
     va_list args;
     va_start(args, message);
@@ -103,5 +94,7 @@ void ERROR(std::string whereami, std::string message, ...) {
 
     va_end(args);
 }
+
 } // namespace LOG
+
 } // namespace Graphite

@@ -1,12 +1,9 @@
 #pragma once
 
-#include <Graphite/core/log.h>
-
-#include <Graphite/core/PhysicsEngine/PhysicsEngine.h>
-
-#include <Graphite/types/module.h>
-
 #include <Graphite/core/Media.h>
+#include <Graphite/core/PhysicsEngine/PhysicsEngine.h>
+#include <Graphite/core/log.h>
+#include <Graphite/types/module.h>
 
 #include <any>
 #include <map>
@@ -17,11 +14,9 @@ namespace Graphite {
 
 class Engine {
   public:
-    // Initialize Game Engine
     Engine(std::string name = "Graphite::Engine", bool fullscreen = true,
            int width = 720, int height = 480);
 
-    // Destroy Game Engine
     ~Engine();
 
     // Start Main Game Loop
@@ -55,4 +50,5 @@ class Engine {
 
   private:
 };
+
 } // namespace Graphite

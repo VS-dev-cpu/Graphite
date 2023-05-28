@@ -14,25 +14,29 @@ namespace Graphite::Media {
 // RenderQueue Action
 enum ACTION {
     // Basic Management
+
     PASS,  // Do Nothing [TM] (void)
     SLEEP, // Sleep Some Time (float)
     PRINT, // Print out a String (std::string)
 
     // Window Managing
+
     SET_FULLSCREEN, // Make Window Fullscreen (bool)
     SET_VSYNC,      // Set VSync Level (int)
 
     // Resource Managing
+
     ADD_SHADER,  // Add Shader (std::pair<std::string, shader>)
     ADD_TEXTURE, // Add Texture std::pair<std::string, texture>
     ADD_MESH,    // Add Mesh (TODO)
 
     // Rendering
+
     CLEAR,        // Clear Screen (vec3)
     DRAW_TEXTURE, // Render Image
     DRAW_MESH,    // Render Mesh
 
-    // TODO: Add More Functions
+    // TODO: More Functions
 };
 
 typedef std::any RenderData;
@@ -41,11 +45,9 @@ typedef std::pair<ACTION, RenderData> RenderTask;
 //  The Media Engine (responsible for Windowing, Rendering and Audio)
 class Media {
   public:
-    // Initialize Media Engine
     Media(std::string name = "Graphite::Media", bool fullscreen = true,
           int width = 720, int height = 480);
 
-    // Destroy Media Engine
     ~Media();
 
     // Sync With RenderThread & Update RenderQueue
@@ -83,4 +85,5 @@ class Media {
   private:
     static void *render(void *arg);
 };
+
 } // namespace Graphite::Media

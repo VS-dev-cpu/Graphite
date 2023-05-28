@@ -37,4 +37,5 @@ class Module {
     virtual void
     onSceneChange(std::string newScene){}; // called on scene change
 };
+
 } // namespace Graphite

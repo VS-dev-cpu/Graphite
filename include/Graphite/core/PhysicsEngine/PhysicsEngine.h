@@ -1,16 +1,17 @@
 #pragma once
 
-// Made using this documentation:
+// Original Documentation:
 // https://www.reactphysics3d.com/documentation/manual/ReactPhysics3D-UserManual.pdf
-// hope it helps :)
 
 #include <Graphite/core/log.h>
 
-#undef None // to avoid X11 API Conflicts
 #include <reactphysics3d/reactphysics3d.h>
+
 using namespace reactphysics3d;
 
 #include <vector>
+
+namespace Graphite {
 
 // Wrapper for the ReactPhysics3D Physics Engine
 class Physics {
@@ -41,3 +42,5 @@ class Physics {
         return (1000.0f * res.tv_sec + (float)res.tv_nsec / 1e6) / 1000.0f;
     }
 };
+
+} // namespace Graphite

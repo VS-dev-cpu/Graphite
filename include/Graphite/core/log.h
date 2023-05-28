@@ -10,9 +10,12 @@
 #include <string>
 
 namespace Graphite {
+
+// Get Program Uptime (Seconds)
 double time();
 
 namespace LOG {
+
 // Get Current Timestamp
 std::string TIME_NOW();
 
@@ -33,5 +36,7 @@ void WARNING(std::string whereami, std::string message, ...);
 
 // Print an Error Message
 void ERROR(std::string whereami, std::string message, ...);
+
 } // namespace LOG
+
 } // namespace Graphite

@@ -2,15 +2,12 @@
 #include <Graphite/core/Media.h>
 
 namespace Graphite::Media {
+
 Media::Media(std::string name, bool fullscreen, int width, int height)
     : name(name), fullscreen(fullscreen), width(width), height(height) {
-    // Initialize Windower & Renderer
-    // windower = new WINDOWER::GLFW;
-    // renderer = new RENDERER::OpenGL;
 
     running = true;
 
-    // Initialize Render Thread
     if (pthread_create(&renderThread, nullptr, &render, this))
         LOG::ERROR("Media", "Render Thread Failed");
     else
@@ -18,7 +15,6 @@ Media::Media(std::string name, bool fullscreen, int width, int height)
 }
 
 Media::~Media() {
-    // Stop Threads
     running = false;
     pthread_join(renderThread, NULL);
 }
@@ -142,4 +138,5 @@ void *Media::render(void *arg) {
     pthread_exit(nullptr);
     return nullptr;
 }
+
 } // namespace Graphite::Media

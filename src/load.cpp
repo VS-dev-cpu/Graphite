@@ -3,6 +3,7 @@
 #include <fstream>
 
 namespace Graphite::LOAD {
+
 std::string Text(std::string path, std::string ext) {
     if (path == "")
         return "";
@@ -31,7 +32,6 @@ std::string Text(std::string path, std::string ext) {
     return out;
 }
 
-// Load Image
 texture Image(std::string path) {
     texture out;
     stbi_set_flip_vertically_on_load(1);
@@ -44,7 +44,6 @@ texture Image(std::string path) {
     return out;
 }
 
-// Load Shader
 shader Shader(std::string vertex_path, std::string fragment_path,
               std::string geometry_path) {
     shader out;
@@ -58,10 +57,10 @@ shader Shader(std::string vertex_path, std::string fragment_path,
 
 shader Shader(std::string path) { return Shader(path, path, path); }
 
-// Load Mesh
 mesh Mesh() {
     mesh m;
 
     return m;
 }
+
 } // namespace Graphite::LOAD

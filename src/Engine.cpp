@@ -1,6 +1,7 @@
 #include <Graphite/Engine.h>
 
 namespace Graphite {
+
 // Initialize Engine
 Engine::Engine(std::string name, bool fullscreen, int width, int height)
     : me(name, fullscreen, width, height) {
@@ -43,4 +44,5 @@ uint Engine::add(Module *module) {
     module->engine = this;
     return module->id = modules.size() - 1;
 }
+
 } // namespace Graphite
