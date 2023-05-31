@@ -47,7 +47,7 @@ void *Media::render(void *arg) {
         while (!engine->drawable && engine->running && !engine->quit)
             ;
 
-        auto tasks = engine->renderQueue; // TODO: fix RenderQueue Issue
+        auto tasks = engine->renderQueue;
         engine->drawable = false;
 
         // Draw Render Queue (content)
