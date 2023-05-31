@@ -1,5 +1,6 @@
-#include <Artifex/Artifex.h>
 #include <Graphite/core/Media.h>
+
+#include <Graphite/renderers/OpenGL.h>
 
 namespace Graphite::Media {
 
@@ -39,8 +40,9 @@ void *Media::render(void *arg) {
     pthread_detach(pthread_self());
 
     // Initialize Renderer
-    Artifex ax(engine->name, engine->width, engine->height);
-    ax.fullscreen(engine->fullscreen);
+    Renderer *renderer = new OpenGL();
+    // Artifex ax(engine->name, engine->width, engine->height);
+    // ax.fullscreen(engine->fullscreen);
 
     // Main Render Loop
     while (engine->running) {
@@ -81,13 +83,13 @@ void *Media::render(void *arg) {
             case ACTION::SET_FULLSCREEN: {
                 // Make Window Fullscreen
                 bool en = std::any_cast<bool>(data);
-                ax.fullscreen(en);
+                // ax.fullscreen(en);
             }
 
             case ACTION::SET_VSYNC: {
                 // Set VSync Level
                 int level = std::any_cast<int>(data);
-                ax.vsync(level);
+                // ax.vsync(level);
             } break;
 
                 // Resource Managing
@@ -96,16 +98,17 @@ void *Media::render(void *arg) {
                 // Add Shader
                 std::pair<std::string, shader> sh =
                     std::any_cast<std::pair<std::string, shader>>(data);
-                ax.shader(sh.second.vertex, sh.second.fragment,
-                          sh.second.geometry);
+                // ax.shader(sh.second.vertex, sh.second.fragment,
+                //           sh.second.geometry);
             } break;
 
             case ACTION::ADD_TEXTURE: {
                 // Add Texture
                 std::pair<std::string, texture> tex =
                     std::any_cast<std::pair<std::string, texture>>(data);
-                ax.texture(tex.second.data, tex.second.width, tex.second.height,
-                           tex.second.nrChannels);
+                // ax.texture(tex.second.data, tex.second.width,
+                // tex.second.height,
+                //            tex.second.nrChannels);
             } break;
 
                 // Rendering
@@ -113,7 +116,7 @@ void *Media::render(void *arg) {
             case ACTION::CLEAR: {
                 // Clear Screen
                 vec3 color = std::any_cast<vec3>(data);
-                ax.clear(color.x, color.y, color.z);
+                // ax.clear(color.x, color.y, color.z);
             } break;
 
             case ACTION::DRAW_TEXTURE: {
@@ -127,7 +130,7 @@ void *Media::render(void *arg) {
         }
 
         // Update Screen
-        engine->running = ax.update();
+        // engine->running = ax.update();
         tasks.clear();
 
         if (engine->quit)

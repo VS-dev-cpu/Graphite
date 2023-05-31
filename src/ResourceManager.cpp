@@ -1,6 +1,8 @@
-#include <Artifex/load.h>
+#include <Graphite/core/ResourceManager.h>
 
 #include <GL/glad.h>
+#include <GL/stb_image.h>
+
 #include <cstring>
 #include <fstream>
 #include <random>

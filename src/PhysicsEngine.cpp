@@ -1,4 +1,6 @@
-#include <Graphite/core/PhysicsEngine/PhysicsEngine.h>
+#include <Graphite/PhysicsEngine/PhysicsEngine.h>
+
+namespace Graphite {
 
 Physics::Physics() {
     // TODO: Ability to change settings on init
@@ -29,3 +31,5 @@ int Physics::addRigidBody() {
     rigidbody.push_back(world->createRigidBody(transform));
     return rigidbody.size() - 1;
 }
+
+} // namespace Graphite

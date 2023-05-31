@@ -1,5 +1,4 @@
 #include <Graphite/Engine.h>
-#include <Graphite/core/load.h>
 #include <iostream>
 
 using namespace std;
@@ -11,7 +10,7 @@ class Game : public Graphite::Module {
         Graphite::LOG::DEBUG("GameModule", "Hello");
         engine->me.add(Graphite::Media::ACTION::PRINT, (std::string) "Hello");
 
-        tex = Graphite::LOAD::Image("res/milk.png");
+        // tex = Graphite::LOAD::Image("res/milk.png");
         engine->me.add(Graphite::Media::ACTION::ADD_TEXTURE,
                        std::pair<std::string, Graphite::texture>("tex", tex));
     }

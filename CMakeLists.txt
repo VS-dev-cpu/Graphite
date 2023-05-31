@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.8)
 
-#set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O3 -Wall")
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
-#set(CMAKE_PREFIX_PATH "/usr/lib;/usr/local/lib")
-
+find_package(glfw3 REQUIRED)
 find_package(ReactPhysics3D REQUIRED)
-add_subdirectory(Artifex)
 
-include_directories("include" "Artifex/include")
-link_libraries(Artifex ReactPhysics3D::ReactPhysics3D)
+include_directories("include")
 
+link_libraries(glfw ReactPhysics3D::ReactPhysics3D)
+
+# Graphite (Game Engine) Project
 project(Graphite)
 
 add_library(Graphite
@@ -17,9 +17,13 @@ add_library(Graphite
 
     src/Media.cpp
     src/PhysicsEngine.cpp
+    src/ResourceManager.cpp
 
-    src/load.cpp
     src/log.cpp
+
+    src/GL/glad.c
+    src/GL/stb_image.c
 )
 
+# Hello World Example
 add_subdirectory(hello_graphite)
