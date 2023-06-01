@@ -56,8 +56,11 @@ class MediaEngine {
     // Exit Render Loop
     void exit();
 
-    // Add Action to Queue
-    void add(ACTION action, RenderData data);
+    // Rendering Actions
+    // TODO
+
+    // Mixing Actions
+    // TODO
 
   public:
     // Window Properties
@@ -78,6 +81,7 @@ class MediaEngine {
 
   private:
     static void *render(void *arg);
+    void add(ACTION action, RenderData data);
 };
 
 } // namespace Graphite
