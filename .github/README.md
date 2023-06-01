@@ -30,7 +30,7 @@ I use [Visual Studio Codium](https://vscodium.com/) with the following extension
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
 
 2. Clone the Repo (with submodule)
-> git clone --recurse-submodules https://github.com/VS-dev-cpu/Graphite
+> git clone https://github.com/VS-dev-cpu/Graphite
 
 3. Build Physics Engine
 > git clone https://github.com/DanielChappuis/reactphysics3d.git
