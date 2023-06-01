@@ -1,26 +1,27 @@
-#include <Graphite/core/Media.h>
+#include <Graphite/core/MediaEngine.h>
 
 #include <Graphite/renderers/OpenGL.h>
 
-namespace Graphite::Media {
+namespace Graphite {
 
-Media::Media(std::string name, bool fullscreen, int width, int height)
+MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
+                         int height)
     : name(name), fullscreen(fullscreen), width(width), height(height) {
 
     running = true;
 
     if (pthread_create(&renderThread, nullptr, &render, this))
-        LOG::ERROR("Media", "Render Thread Failed");
+        LOG::ERROR("MediaEngine", "Render Thread Failed");
     else
-        LOG::SYSTEM("Media", "Renderer Initialized");
+        LOG::SYSTEM("MediaEngine", "Renderer Initialized");
 }
 
-Media::~Media() {
+MediaEngine::~MediaEngine() {
     running = false;
     pthread_join(renderThread, NULL);
 }
 
-void Media::update() {
+void MediaEngine::update() {
     drawable = true;
     while (drawable && running && !quit)
         ;
@@ -28,15 +29,15 @@ void Media::update() {
     renderQueue.clear();
 }
 
-void Media::exit() { quit = true; }
+void MediaEngine::exit() { quit = true; }
 
-void Media::add(ACTION action, RenderData data) {
+void MediaEngine::add(ACTION action, RenderData data) {
     renderQueue.push_back(RenderTask(action, data));
 }
 
-void *Media::render(void *arg) {
+void *MediaEngine::render(void *arg) {
     // Detach Thread
-    Media *engine = (Media *)arg;
+    MediaEngine *engine = (MediaEngine *)arg;
     pthread_detach(pthread_self());
 
     // Initialize Renderer
@@ -96,16 +97,16 @@ void *Media::render(void *arg) {
 
             case ACTION::ADD_SHADER: {
                 // Add Shader
-                std::pair<std::string, shader> sh =
-                    std::any_cast<std::pair<std::string, shader>>(data);
+                // std::pair<std::string, Shader> sh =
+                //   std::any_cast<std::pair<std::string, shader>>(data);
                 // ax.shader(sh.second.vertex, sh.second.fragment,
                 //           sh.second.geometry);
             } break;
 
             case ACTION::ADD_TEXTURE: {
                 // Add Texture
-                std::pair<std::string, texture> tex =
-                    std::any_cast<std::pair<std::string, texture>>(data);
+                std::pair<std::string, Texture> tex =
+                    std::any_cast<std::pair<std::string, Texture>>(data);
                 // ax.texture(tex.second.data, tex.second.width,
                 // tex.second.height,
                 //            tex.second.nrChannels);
@@ -130,7 +131,7 @@ void *Media::render(void *arg) {
         }
 
         // Update Screen
-        // engine->running = ax.update();
+        engine->running = renderer->update();
         tasks.clear();
 
         if (engine->quit)
@@ -142,4 +143,4 @@ void *Media::render(void *arg) {
     return nullptr;
 }
 
-} // namespace Graphite::Media
+} // namespace Graphite

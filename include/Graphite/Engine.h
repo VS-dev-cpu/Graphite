@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Graphite/PhysicsEngine/PhysicsEngine.h>
-#include <Graphite/core/Media.h>
+#include <Graphite/core/MediaEngine.h>
 #include <Graphite/core/log.h>
 #include <Graphite/types/module.h>
 
@@ -33,7 +33,7 @@ class Engine {
     double now, deltaTime;
 
     // Media Engine
-    Media::Media me;
+    MediaEngine me;
 
     vec2 cursor;
 

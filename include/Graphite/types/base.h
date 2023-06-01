@@ -3,9 +3,11 @@
 #include <reactphysics3d/mathematics/mathematics.h>
 
 #include <string>
+#include <vector>
 
 namespace Graphite {
 
+// React Physics Typenames
 typedef reactphysics3d::Vector2 vec2;
 typedef reactphysics3d::Vector3 vec3;
 
@@ -16,34 +18,32 @@ typedef reactphysics3d::Quaternion Quaternion;
 typedef reactphysics3d::Transform Transform;
 typedef reactphysics3d::Ray Ray;
 
-struct texture {
-    int width, height, nrChannels;
-    unsigned char *data = nullptr;
-};
+// RAW Texture
+typedef struct {
+    unsigned char *data;
+    int width, height;
+    int channels;
+} Texture;
 
-struct shader {
-    std::string vertex = "";
-    std::string fragment = "";
-    std::string geometry = "";
-};
+// Material
+typedef struct {
+    Texture diffuse;
+    Texture specular;
 
-struct material {
-    texture diffuse;
-    texture specular;
+    float shininess;
 
-    float shininess = 32.0f;
-
-    bool lit = true;
+    bool lit;
 
     // TODO: Emission Map, Transparencity Map
-};
+} Material;
 
-struct mesh {
-    std::vector<vec3> vertices;
-    std::vector<vec3> normals;
-    std::vector<vec2> texcoords;
+// Mesh
+typedef struct {
+    std::vector<float> vertices, texcoords, normals;
+    std::vector<int> faces;
 
-    std::string material;
-};
+    std::string material_name;
+    unsigned int material;
+} Mesh;
 
 } // namespace Graphite

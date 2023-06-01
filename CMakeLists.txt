@@ -15,9 +15,11 @@ project(Graphite)
 add_library(Graphite
     src/Engine.cpp
 
-    src/Media.cpp
+    src/MediaEngine.cpp
     src/PhysicsEngine.cpp
     src/ResourceManager.cpp
+
+    src/renderers/OpenGL.cpp
 
     src/log.cpp
 

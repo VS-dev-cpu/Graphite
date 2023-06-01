@@ -9,7 +9,7 @@
 #include <variant>
 #include <vector>
 
-namespace Graphite::Media {
+namespace Graphite {
 
 // RenderQueue Action
 enum ACTION {
@@ -43,12 +43,12 @@ typedef std::any RenderData;
 typedef std::pair<ACTION, RenderData> RenderTask;
 
 //  The Media Engine (responsible for Windowing, Rendering and Audio)
-class Media {
+class MediaEngine {
   public:
-    Media(std::string name = "Graphite::Media", bool fullscreen = true,
-          int width = 720, int height = 480);
+    MediaEngine(std::string name = "Graphite::Media", bool fullscreen = true,
+                int width = 720, int height = 480);
 
-    ~Media();
+    ~MediaEngine();
 
     // Sync With RenderThread & Update RenderQueue
     void update();
@@ -68,17 +68,11 @@ class Media {
     std::atomic<bool> running = false;
     std::atomic<bool> quit = false;
 
-    // Windower* windower;
   private:
     // Render Thread
     pthread_t renderThread;
 
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-    pthread_cond_t renderSignal = PTHREAD_COND_INITIALIZER;
-
     std::atomic<bool> drawable = false;
-
-    // Renderer *renderer;
 
     std::vector<RenderTask> renderQueue;
 
@@ -86,4 +80,4 @@ class Media {
     static void *render(void *arg);
 };
 
-} // namespace Graphite::Media
+} // namespace Graphite

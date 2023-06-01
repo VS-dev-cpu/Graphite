@@ -1,22 +1,10 @@
 #pragma once
 
+#include <Graphite/types/base.h>
+
 #include <string>
 #include <unordered_map>
 #include <vector>
-
-typedef struct {
-    unsigned char *data;
-    int width, height;
-    int channels;
-} Texture;
-
-typedef struct {
-} Material;
-
-typedef struct {
-    std::vector<float> vertices, texcoords, normals;
-    std::vector<int> faces;
-} Mesh;
 
 namespace Graphite {
 
