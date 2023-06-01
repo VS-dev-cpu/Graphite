@@ -49,7 +49,7 @@ Coming Later!
 
 #### MacOS
 
-I don't own a Mac Device, but if you do and want to help me out, contact me!
+I don't own a Mac Device, but if you do and want to help me out, create a pull request!
 
 ### Usage
 
