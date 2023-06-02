@@ -24,7 +24,11 @@ I use [Visual Studio Codium](https://vscodium.com/) with the following extension
 
 ### Setup
 
-#### Linux (Manjaro, Arch Based)
+#### Linux (Debian Based)
+
+Coming Later!
+
+#### Linux (Arch Based)
 
 1. Install (Build) Tools
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
