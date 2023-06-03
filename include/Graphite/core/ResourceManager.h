@@ -36,13 +36,12 @@ class ResourceManager {
 
     std::vector<Shader> shaders;
     std::vector<Texture> textures;
-    std::vector<Material> materials;
-    std::vector<Mesh> meshes;
+    // std::vector<Material> materials;
+    // std::vector<Mesh> meshes;
 
     // [.obj] & [.mtl] file containers
-    std::unordered_map<std::string, unsigned int> obj;
-    std::unordered_map<std::string, std::unordered_map<std::string, Material>>
-        mtl;
+    std::unordered_map<std::string, Mesh> obj;
+    std::unordered_map<std::string, Material> mtl;
 };
 
 // Load Texture

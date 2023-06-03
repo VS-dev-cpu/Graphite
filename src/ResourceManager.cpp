@@ -30,18 +30,16 @@ ResourceManager::~ResourceManager() {
     // Free Materials
     // for (Material mat : materials)
 
-    materials.clear();
+    mtl.clear();
 
     // Free Meshes
-    for (Mesh mesh : meshes) {
+    for (auto [name, mesh] : obj) {
         mesh.vertices.clear();
         mesh.texcoords.clear();
         mesh.normals.clear();
-
-        mesh.faces.clear();
     }
 
-    meshes.clear();
+    obj.clear();
 }
 
 unsigned int ResourceManager::load_shader(std::string path) {
@@ -108,7 +106,6 @@ std::vector<std::string> ResourceManager::load_material(std::string path) {
     std::ifstream file(defaultPath[2] + path);
     if (file.is_open()) {
         std::string cursor;
-        Material *p;
 
         std::string line;
         while (getline(file, line)) {
@@ -120,7 +117,7 @@ std::vector<std::string> ResourceManager::load_material(std::string path) {
             if (!strcmp(index, "newmtl")) {
                 // New Material
                 cursor = data;
-                p = &mtl[path][cursor];
+                out.push_back(cursor);
             } else {
                 // DoSomething
             }
@@ -136,9 +133,14 @@ std::vector<std::string> ResourceManager::load_mesh(std::string path) {
     std::vector<std::string> out;
 
     // TODO
+
     std::ifstream file(defaultPath[3] + path);
 
     if (file.is_open()) {
+        std::string cursor;
+
+        std::vector<float> vertices, texcoords, normals;
+
         std::string line;
         while (getline(file, line)) {
             char index[8];
@@ -148,8 +150,63 @@ std::vector<std::string> ResourceManager::load_mesh(std::string path) {
 
             if (!strcmp(index, "o")) {
                 // New Object
+                cursor = data;
+                out.push_back(cursor);
+            } else if (!strcmp(index, "v")) {
+                // Vertex (x, y, z, [w])
+                float x, y, z, w = 1.0f;
+                sscanf(data, "%f %f %f %f", &x, &y, &z, &w);
+
+                vertices.push_back(x);
+                vertices.push_back(y);
+                vertices.push_back(z);
+                vertices.push_back(w);
+            } else if (!strcmp(index, "vt")) {
+                // Vertex Texture (u, v, [w])
+                float u, v = 0.0f, w = 0.0f;
+                sscanf(data, "%f %f %f", &u, &v, &w);
+
+                texcoords.push_back(u);
+                texcoords.push_back(v);
+                texcoords.push_back(w);
+            } else if (!strcmp(index, "vn")) {
+                // Vertex Normal (x, y, z)
+                float x, y, z;
+                sscanf(data, "%f %f %f", &x, &y, &z);
+
+                normals.push_back(x);
+                normals.push_back(y);
+                normals.push_back(z);
+            } else if (!strcmp(index, "f")) {
+                // Face (v[/vt/vn] v[/vt/vn] v[/vt/vn] ...)
+
+                float v[4], t[4], n[4];
+                char part[4][128];
+                int parts = sscanf(data, "%s %s %s %s", part[0], part[1],
+                                   part[2], part[3]);
+
+                for (int i = 0; i < parts; i++) {
+                    if (sscanf(part[i], "%f/%f/%f", &v[i], &t[i], &n[i]) != 3)
+                        if (sscanf(data, "%f//%f", &v[i], &n[i]) != 2)
+                            if (sscanf(data, "%f/%f", &v[i], &t[i]) != 2)
+                                if (sscanf(data, "%f", &v[i]) != 1) {
+                                    printf("Failed to read Face Line\n");
+                                    parts = 0;
+                                }
+                }
+
+                for (int i = 0; i < parts; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        obj[cursor].vertices.push_back(vertices[v[i] + j]);
+                        obj[cursor].normals.push_back(normals[n[i] + j]);
+                        if (j < 3)
+                            obj[cursor].texcoords.push_back(
+                                texcoords[t[i] + j]);
+                    }
+                }
+
             } else {
-                // DoSomething
+                // TODO: Something
             }
         }
 

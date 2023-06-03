@@ -46,8 +46,7 @@ typedef struct {
 
 // Mesh
 typedef struct {
-    std::vector<vec3> vertices, texcoords, normals;
-    std::vector<int> faces;
+    std::vector<float> vertices, normals, texcoords;
 
     std::string material_name;
     unsigned int material;

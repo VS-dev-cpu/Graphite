@@ -1,3 +1,4 @@
+#include "Graphite/core/ResourceManager.h"
 #include <Graphite/Engine.h>
 #include <iostream>
 
