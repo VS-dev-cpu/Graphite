@@ -41,7 +41,7 @@ typedef struct {
 
     bool lit;
 
-    // TODO: Emission Map, Transparencity Map
+    // TODO: More Parameters
 } Material;
 
 // Mesh

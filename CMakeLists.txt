@@ -19,12 +19,12 @@ add_library(Graphite
     src/PhysicsEngine.cpp
     src/ResourceManager.cpp
 
-    src/renderers/OpenGL.cpp
+    src/Renderer.cpp
 
     src/log.cpp
 
     src/GL/glad.c
-    src/GL/stb_image.c
+    src/stb_image.c
 )
 
 # Hello World Example

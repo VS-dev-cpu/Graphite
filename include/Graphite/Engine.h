@@ -1,7 +1,9 @@
 #pragma once
 
-#include <Graphite/PhysicsEngine/PhysicsEngine.h>
 #include <Graphite/core/MediaEngine.h>
+
+#include <Graphite/PhysicsEngine/PhysicsEngine.h>
+
 #include <Graphite/core/log.h>
 #include <Graphite/types/module.h>
 

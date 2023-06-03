@@ -132,8 +132,6 @@ std::vector<std::string> ResourceManager::load_material(std::string path) {
 std::vector<std::string> ResourceManager::load_mesh(std::string path) {
     std::vector<std::string> out;
 
-    // TODO
-
     std::ifstream file(defaultPath[3] + path);
 
     if (file.is_open()) {

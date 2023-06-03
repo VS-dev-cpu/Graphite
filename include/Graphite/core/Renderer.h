@@ -1,14 +1,20 @@
 #pragma once
 
+#include <Graphite/types/base.h>
+
 namespace Graphite {
 
 class Renderer {
   public:
-    Renderer() {}
-    virtual ~Renderer() {}
+    Renderer();
+    ~Renderer();
 
-    virtual bool update() { return false; }
-    virtual void clear() {}
+    bool update();
+
+    void clear(float red, float green, float blue);
+
+    // bool load_shader(std::string shader);
+    // bool load_texture(Texture texture);
 
   private:
 };
