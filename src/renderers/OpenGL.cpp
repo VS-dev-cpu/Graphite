@@ -2,9 +2,13 @@
 
 namespace Graphite {
 
-OpenGL::OpenGL() {}
+OpenGL::OpenGL() {
+    // Init Window & OpenGL Context
+}
 
-OpenGL::~OpenGL() {}
+OpenGL::~OpenGL() {
+    // Destroy Window & OpenGL Context
+}
 
 bool OpenGL::update() { return false; }
 

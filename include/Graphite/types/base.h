@@ -18,6 +18,13 @@ typedef reactphysics3d::Quaternion Quaternion;
 typedef reactphysics3d::Transform Transform;
 typedef reactphysics3d::Ray Ray;
 
+// RAW GLSL Shader
+typedef struct {
+    std::string vertex;
+    std::string geometry;
+    std::string fragment;
+} Shader;
+
 // RAW Texture
 typedef struct {
     unsigned char *data;
@@ -39,7 +46,7 @@ typedef struct {
 
 // Mesh
 typedef struct {
-    std::vector<float> vertices, texcoords, normals;
+    std::vector<vec3> vertices, texcoords, normals;
     std::vector<int> faces;
 
     std::string material_name;

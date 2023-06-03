@@ -11,29 +11,38 @@ namespace Graphite {
 // Resource Loader & Manager
 class ResourceManager {
   public:
-    ResourceManager();
+    // Initialize Resource Manager
+    ResourceManager(std::string shaderPath, std::string texturePath,
+                    std::string materialPath, std::string meshPath);
+    ResourceManager(std::string resourcePath = "");
+
     ~ResourceManager();
 
-    // Load Texture(s) from file (returns: number of textures loaded)
+    // Load (GLSL) Shader
+    unsigned int load_shader(std::string path);
+
+    // Load Texture(s)
     unsigned int load_texture(std::string path);
 
-    // Load Material(s) from file (returns: number of materials loaded)
-    unsigned int load_material(std::string path);
+    // Load Material(s) (returns: list of materials loaded)
+    std::vector<std::string> load_material(std::string path);
 
-    // Load Material(s) from file (returns: number of meshes loaded)
-    unsigned int load_mesh(std::string path);
+    // Load Material(s) (returns: list of meshes loaded)
+    std::vector<std::string> load_mesh(std::string path);
 
   private:
+    // shader, texture, material, mesh path
+    std::string defaultPath[4];
+
+    std::vector<Shader> shaders;
     std::vector<Texture> textures;
     std::vector<Material> materials;
     std::vector<Mesh> meshes;
 
-    // .obj and .mtl files use strings to identify objects/materials
-    // but we use numbers (unsigned integers) to index them
-    // these variables stores the names associated with the indexes
-    // only for loading !!! using them may reduce performance
-    std::unordered_map<std::string, unsigned int> material_lookup;
-    std::unordered_map<std::string, unsigned int> mesh_lookup;
+    // [.obj] & [.mtl] file containers
+    std::unordered_map<std::string, unsigned int> obj;
+    std::unordered_map<std::string, std::unordered_map<std::string, Material>>
+        mtl;
 };
 
 // Load Texture
