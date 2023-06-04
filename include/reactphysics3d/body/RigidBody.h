@@ -1,27 +1,27 @@
 /********************************************************************************
- * ReactPhysics3D physics library, http://www.reactphysics3d.com                 *
- * Copyright (c) 2010-2022 Daniel Chappuis                                       *
- *********************************************************************************
- *                                                                               *
- * This software is provided 'as-is', without any express or implied warranty.   *
- * In no event will the authors be held liable for any damages arising from the  *
- * use of this software.                                                         *
- *                                                                               *
- * Permission is granted to anyone to use this software for any purpose,         *
- * including commercial applications, and to alter it and redistribute it        *
- * freely, subject to the following restrictions:                                *
- *                                                                               *
- * 1. The origin of this software must not be misrepresented; you must not claim *
- *    that you wrote the original software. If you use this software in a        *
- *    product, an acknowledgment in the product documentation would be           *
- *    appreciated but is not required.                                           *
- *                                                                               *
- * 2. Altered source versions must be plainly marked as such, and must not be    *
- *    misrepresented as being the original software.                             *
- *                                                                               *
- * 3. This notice may not be removed or altered from any source distribution.    *
- *                                                                               *
- ********************************************************************************/
+* ReactPhysics3D physics library, http://www.reactphysics3d.com                 *
+* Copyright (c) 2010-2022 Daniel Chappuis                                       *
+*********************************************************************************
+*                                                                               *
+* This software is provided 'as-is', without any express or implied warranty.   *
+* In no event will the authors be held liable for any damages arising from the  *
+* use of this software.                                                         *
+*                                                                               *
+* Permission is granted to anyone to use this software for any purpose,         *
+* including commercial applications, and to alter it and redistribute it        *
+* freely, subject to the following restrictions:                                *
+*                                                                               *
+* 1. The origin of this software must not be misrepresented; you must not claim *
+*    that you wrote the original software. If you use this software in a        *
+*    product, an acknowledgment in the product documentation would be           *
+*    appreciated but is not required.                                           *
+*                                                                               *
+* 2. Altered source versions must be plainly marked as such, and must not be    *
+*    misrepresented as being the original software.                             *
+*                                                                               *
+* 3. This notice may not be removed or altered from any source distribution.    *
+*                                                                               *
+********************************************************************************/
 
 #ifndef REACTPHYSICS3D_RIGID_BODY_H
 #define REACTPHYSICS3D_RIGID_BODY_H
@@ -32,26 +32,25 @@
 #include <reactphysics3d/mathematics/mathematics.h>
 
 /// Namespace reactphysics3d
-namespace reactphysics3d
-{
+namespace reactphysics3d {
 
-    // Class declarations
-    struct JointListElement;
-    class PhysicsWorld;
-    class MemoryManager;
-    enum class BodyType;
+// Class declarations
+struct JointListElement;
+class PhysicsWorld;
+class MemoryManager;
+enum class BodyType;
 
-    // Class RigidBody
-    /**
-     * This class represents a rigid body of the physics
-     * engine. A rigid body is a non-deformable body that
-     * has a constant mass. This class inherits from the
-     * CollisionBody class.
-     */
-    class RigidBody : public CollisionBody
-    {
+// Class RigidBody
+/**
+ * This class represents a rigid body of the physics
+ * engine. A rigid body is a non-deformable body that
+ * has a constant mass. This class inherits from the
+ * CollisionBody class.
+  */
+class RigidBody : public CollisionBody {
 
-    protected:
+    protected :
+
         // -------------------- Methods -------------------- //
 
         /// Update whether the current overlapping pairs where this body is involed are active or not
@@ -61,28 +60,29 @@ namespace reactphysics3d
         Vector3 computeCenterOfMass() const;
 
         /// Compute the local-space inertia tensor and total mass of the body using its colliders
-        void computeMassAndInertiaTensorLocal(Vector3 &inertiaTensorLocal, decimal &totalMass) const;
+        void computeMassAndInertiaTensorLocal(Vector3& inertiaTensorLocal, decimal& totalMass) const;
 
         /// Compute the inverse of the inertia tensor in world coordinates.
-        static void computeWorldInertiaTensorInverse(const Matrix3x3 &orientation, const Vector3 &inverseInertiaTensorLocal, Matrix3x3 &outInverseInertiaTensorWorld);
+        static void computeWorldInertiaTensorInverse(const Matrix3x3& orientation, const Vector3& inverseInertiaTensorLocal, Matrix3x3& outInverseInertiaTensorWorld);
 
-    public:
+    public :
+
         // -------------------- Methods -------------------- //
 
         /// Constructor
-        RigidBody(PhysicsWorld &world, Entity entity);
+        RigidBody(PhysicsWorld& world, Entity entity);
 
         /// Destructor
         virtual ~RigidBody() override = default;
 
         /// Deleted copy-constructor
-        RigidBody(const RigidBody &body) = delete;
+        RigidBody(const RigidBody& body) = delete;
 
         /// Deleted assignment operator
-        RigidBody &operator=(const RigidBody &body) = delete;
+        RigidBody& operator=(const RigidBody& body) = delete;
 
         /// Set the current position and orientation
-        virtual void setTransform(const Transform &transform) override;
+        virtual void setTransform(const Transform& transform) override;
 
         /// Return the mass of the body
         decimal getMass() const;
@@ -94,25 +94,25 @@ namespace reactphysics3d
         Vector3 getLinearVelocity() const;
 
         /// Set the linear velocity of the body.
-        void setLinearVelocity(const Vector3 &linearVelocity);
+        void setLinearVelocity(const Vector3& linearVelocity);
 
         /// Return the angular velocity
         Vector3 getAngularVelocity() const;
 
         /// Set the angular velocity.
-        void setAngularVelocity(const Vector3 &angularVelocity);
+        void setAngularVelocity(const Vector3& angularVelocity);
 
         /// Return the local inertia tensor of the body (in body coordinates)
-        const Vector3 &getLocalInertiaTensor() const;
+        const Vector3& getLocalInertiaTensor() const;
 
         /// Set the local inertia tensor of the body (in body coordinates)
-        void setLocalInertiaTensor(const Vector3 &inertiaTensorLocal);
+        void setLocalInertiaTensor(const Vector3& inertiaTensorLocal);
 
         /// Return the center of mass of the body (in local-space coordinates)
-        const Vector3 &getLocalCenterOfMass() const;
+        const Vector3& getLocalCenterOfMass() const;
 
         /// Set the center of mass of the body (in local-space coordinates)
-        void setLocalCenterOfMass(const Vector3 &centerOfMass);
+        void setLocalCenterOfMass(const Vector3& centerOfMass);
 
         /// Compute and set the local-space center of mass of the body using its colliders
         void updateLocalCenterOfMassFromColliders();
@@ -154,40 +154,40 @@ namespace reactphysics3d
         void setAngularDamping(decimal angularDamping);
 
         /// Return the lock translation factor
-        const Vector3 &getLinearLockAxisFactor() const;
+        const Vector3& getLinearLockAxisFactor() const;
 
         /// Set the linear lock factor
-        void setLinearLockAxisFactor(const Vector3 &linearLockAxisFactor) const;
+        void setLinearLockAxisFactor(const Vector3& linearLockAxisFactor) const;
 
         /// Return the lock rotation factor
-        const Vector3 &getAngularLockAxisFactor() const;
+        const Vector3& getAngularLockAxisFactor() const;
 
         /// Set the lock rotation factor
-        void setAngularLockAxisFactor(const Vector3 &angularLockAxisFactor) const;
+        void setAngularLockAxisFactor(const Vector3& angularLockAxisFactor) const;
 
         /// Manually apply an external force (in local-space) to the body at its center of mass.
-        void applyLocalForceAtCenterOfMass(const Vector3 &force);
+        void applyLocalForceAtCenterOfMass(const Vector3& force);
 
         /// Manually apply an external force (in world-space) to the body at its center of mass.
-        void applyWorldForceAtCenterOfMass(const Vector3 &force);
+        void applyWorldForceAtCenterOfMass(const Vector3& force);
 
         /// Manually apply an external force (in local-space) to the body at a given point (in local-space).
-        void applyLocalForceAtLocalPosition(const Vector3 &force, const Vector3 &point);
+        void applyLocalForceAtLocalPosition(const Vector3& force, const Vector3& point);
 
         /// Manually apply an external force (in world-space) to the body at a given point (in local-space).
-        void applyWorldForceAtLocalPosition(const Vector3 &force, const Vector3 &point);
+        void applyWorldForceAtLocalPosition(const Vector3& force, const Vector3& point);
 
         /// Manually apply an external force (in local-space) to the body at a given point (in world-space).
-        void applyLocalForceAtWorldPosition(const Vector3 &force, const Vector3 &point);
+        void applyLocalForceAtWorldPosition(const Vector3& force, const Vector3& point);
 
         /// Manually apply an external force (in world-space) to the body at a given point (in world-space).
-        void applyWorldForceAtWorldPosition(const Vector3 &force, const Vector3 &point);
+        void applyWorldForceAtWorldPosition(const Vector3& force, const Vector3& point);
 
         /// Manually apply an external torque to the body (in world-space).
-        void applyWorldTorque(const Vector3 &torque);
+        void applyWorldTorque(const Vector3& torque);
 
         /// Manually apply an external torque to the body (in local-space).
-        void applyLocalTorque(const Vector3 &torque);
+        void applyLocalTorque(const Vector3& torque);
 
         /// Reset the manually applied force to zero
         void resetForce();
@@ -196,10 +196,10 @@ namespace reactphysics3d
         void resetTorque();
 
         /// Return the total manually applied force on the body (in world-space)
-        const Vector3 &getForce() const;
+        const Vector3& getForce() const;
 
         /// Return the total manually applied torque on the body (in world-space)
-        const Vector3 &getTorque() const;
+        const Vector3& getTorque() const;
 
         /// Return whether or not the body is allowed to sleep
         bool isAllowedToSleep() const;
@@ -214,15 +214,15 @@ namespace reactphysics3d
         virtual void setIsActive(bool isActive) override;
 
         /// Create a new collider and add it to the body
-        virtual Collider *addCollider(CollisionShape *collisionShape, const Transform &transform) override;
+        virtual Collider* addCollider(CollisionShape* collisionShape, const Transform& transform) override;
 
         /// Remove a collider from the body
-        virtual void removeCollider(Collider *collider) override;
+        virtual void removeCollider(Collider* collider) override;
 
 #ifdef IS_RP3D_PROFILING_ENABLED
 
-        /// Set the profiler
-        void setProfiler(Profiler *profiler) override;
+		/// Set the profiler
+		void setProfiler(Profiler* profiler) override;
 
 #endif
 
@@ -241,27 +241,26 @@ namespace reactphysics3d
         friend class SolveSliderJointSystem;
         friend class Joint;
         friend class Collider;
-    };
+};
 
-    /// Compute the inverse of the inertia tensor in world coordinates.
-    RP3D_FORCE_INLINE void RigidBody::computeWorldInertiaTensorInverse(const Matrix3x3 &orientation, const Vector3 &inverseInertiaTensorLocal, Matrix3x3 &outInverseInertiaTensorWorld)
-    {
+/// Compute the inverse of the inertia tensor in world coordinates.
+RP3D_FORCE_INLINE void RigidBody::computeWorldInertiaTensorInverse(const Matrix3x3& orientation, const Vector3& inverseInertiaTensorLocal, Matrix3x3& outInverseInertiaTensorWorld) {
 
-        outInverseInertiaTensorWorld[0][0] = orientation[0][0] * inverseInertiaTensorLocal.x;
-        outInverseInertiaTensorWorld[0][1] = orientation[1][0] * inverseInertiaTensorLocal.x;
-        outInverseInertiaTensorWorld[0][2] = orientation[2][0] * inverseInertiaTensorLocal.x;
+    outInverseInertiaTensorWorld[0][0] = orientation[0][0] * inverseInertiaTensorLocal.x;
+    outInverseInertiaTensorWorld[0][1] = orientation[1][0] * inverseInertiaTensorLocal.x;
+    outInverseInertiaTensorWorld[0][2] = orientation[2][0] * inverseInertiaTensorLocal.x;
 
-        outInverseInertiaTensorWorld[1][0] = orientation[0][1] * inverseInertiaTensorLocal.y;
-        outInverseInertiaTensorWorld[1][1] = orientation[1][1] * inverseInertiaTensorLocal.y;
-        outInverseInertiaTensorWorld[1][2] = orientation[2][1] * inverseInertiaTensorLocal.y;
+    outInverseInertiaTensorWorld[1][0] = orientation[0][1] * inverseInertiaTensorLocal.y;
+    outInverseInertiaTensorWorld[1][1] = orientation[1][1] * inverseInertiaTensorLocal.y;
+    outInverseInertiaTensorWorld[1][2] = orientation[2][1] * inverseInertiaTensorLocal.y;
 
-        outInverseInertiaTensorWorld[2][0] = orientation[0][2] * inverseInertiaTensorLocal.z;
-        outInverseInertiaTensorWorld[2][1] = orientation[1][2] * inverseInertiaTensorLocal.z;
-        outInverseInertiaTensorWorld[2][2] = orientation[2][2] * inverseInertiaTensorLocal.z;
+    outInverseInertiaTensorWorld[2][0] = orientation[0][2] * inverseInertiaTensorLocal.z;
+    outInverseInertiaTensorWorld[2][1] = orientation[1][2] * inverseInertiaTensorLocal.z;
+    outInverseInertiaTensorWorld[2][2] = orientation[2][2] * inverseInertiaTensorLocal.z;
 
-        outInverseInertiaTensorWorld = orientation * outInverseInertiaTensorWorld;
-    }
+    outInverseInertiaTensorWorld = orientation * outInverseInertiaTensorWorld;
+}
 
 }
 
-#endif
+ #endif

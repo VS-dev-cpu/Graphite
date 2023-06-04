@@ -1,6 +1,6 @@
 #include <Graphite/core/MediaEngine.h>
 
-#include <Graphite/renderers/OpenGL.h>
+#include <Graphite/core/Renderer.h>
 
 namespace Graphite {
 
@@ -41,7 +41,7 @@ void *MediaEngine::render(void *arg) {
     pthread_detach(pthread_self());
 
     // Initialize Renderer
-    Renderer *renderer = new OpenGL();
+    Renderer renderer;
     // Artifex ax(engine->name, engine->width, engine->height);
     // ax.fullscreen(engine->fullscreen);
 
@@ -131,7 +131,7 @@ void *MediaEngine::render(void *arg) {
         }
 
         // Update Screen
-        engine->running = renderer->update();
+        engine->running = renderer.update();
         tasks.clear();
 
         if (engine->quit)
