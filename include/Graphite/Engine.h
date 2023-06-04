@@ -2,8 +2,6 @@
 
 #include <Graphite/core/MediaEngine.h>
 
-#include <Graphite/PhysicsEngine/PhysicsEngine.h>
-
 #include <Graphite/core/log.h>
 #include <Graphite/types/module.h>
 
@@ -40,9 +38,6 @@ class Engine {
     vec2 cursor;
 
   private:
-    // Main Physics Engine
-    Physics physics;
-
     // Engine Flags
     bool running = false;  // is Engine Running ?
     bool quit = false;     // should quit ?
