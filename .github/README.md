@@ -1,9 +1,4 @@
-# Graphite
-## Pre-Alpha Version
-> WARNING: The Current Version is a work in progress version!
-> With the first stable version, i'll make a dev branch
-
-> [Graphite](https://en.wikipedia.org/wiki/Graphite) is a temporary name, you can suggest other ones [here](https://github.com/VS-dev-cpu/Game-Engine/issues/2)
+# Graphite - Game Engine
 
 ## About
 
