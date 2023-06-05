@@ -21,14 +21,21 @@ I use [Visual Studio Codium](https://vscodium.com/) with the following extension
 
 #### Linux (Debian Based)
 
-Coming Later!
+1. Install Build Tools
+> sudo apt install git cmake ninja-build mingw-w64 make libglfw3
+
+2. Clone the Repo
+> git clone https://github.com/VS-dev-cpu/Graphite
+
+3. Build Physics Engine
+> TODO
 
 #### Linux (Arch Based)
 
-1. Install (Build) Tools
+1. Install Build Tools
 > sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
 
-2. Clone the Repo (with submodule)
+2. Clone the Repo
 > git clone https://github.com/VS-dev-cpu/Graphite
 
 3. Build Physics Engine
