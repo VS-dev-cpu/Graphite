@@ -22,7 +22,7 @@ I use [Visual Studio Codium](https://vscodium.com/) with the following extension
 #### Linux (Debian Based)
 
 1. Install Build Tools
-> sudo apt install git cmake ninja-build mingw-w64 make libglfw3
+> sudo apt install build-essentials git cmake ninja-build mingw-w64 make libglfw3
 
 2. Clone the Repo
 > git clone https://github.com/VS-dev-cpu/Graphite
