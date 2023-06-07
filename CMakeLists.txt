@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 
-find_package(glfw3 REQUIRED)
 find_package(ReactPhysics3D REQUIRED)
 
 include_directories("include")
 
-link_libraries(glfw ReactPhysics3D::ReactPhysics3D)
+link_libraries(glfw ReactPhysics3D::ReactPhysics3D pthread)
 
 # Graphite (Game Engine) Project
 project(Graphite)
