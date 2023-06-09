@@ -28,7 +28,7 @@ sudo apt install build-essentials git cmake ninja-build mingw-w64 make libglfw3
 git clone https://github.com/VS-dev-cpu/Graphite
 ```
 
-> TODO!
+> TODO
 
 #### Linux (Arch Based)
 
@@ -42,7 +42,7 @@ sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
 git clone https://github.com/VS-dev-cpu/Graphite
 ```
 
-> TODO!
+> TODO
 
 #### Windows
 
