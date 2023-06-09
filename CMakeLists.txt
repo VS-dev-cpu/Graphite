@@ -24,7 +24,7 @@ add_library(Graphite
     src/log.cpp
 
     src/GL/glad.c
-    src/stb_image.c
+    src/GL/stb_image.c
 )
 
 # Hello World Example
