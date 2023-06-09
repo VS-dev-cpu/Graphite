@@ -2,16 +2,13 @@
 
 ## About
 
-I like to compare this engine to [Bevy](https://bevyengine.org/), as it will only be a library for C++, but later i may as well make a GUI for it.
-
 It will...
+- use Vulkan
 - be modular (everything is scriptable)
-- target lower-end hardware
+- be light-weight
 - be scriptable in C++ and [Lua](https://www.lua.org/about.html) (and Custom Script Modules)
 - have cross-platform support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com/))
-- use [ReactPhysics3D](https://reactphysics3d.com/) as a Physics Engine (or custom)
-
-... these are just plans, they may (and probably will) change
+- use [Carbon](https://github.com/VS-dev-cpu/Carbon) for Physics
 
 I use [Visual Studio Codium](https://vscodium.com/) with the following extensions: [clangd](https://open-vsx.org/extension/llvm-vs-code-extensions/vscode-clangd), [CMake](https://open-vsx.org/extension/twxs/cmake), [CMake IntelliSense](https://open-vsx.org/extension/KylinIdeTeam/cmake-intellisence), [CMake Tools](https://open-vsx.org/extension/ms-vscode/cmake-tools), [Todo Tree](https://open-vsx.org/vscode/item?itemName=Gruntfuggly.todo-tree)
 
@@ -22,32 +19,30 @@ I use [Visual Studio Codium](https://vscodium.com/) with the following extension
 #### Linux (Debian Based)
 
 1. Install Build Tools
-> sudo apt install build-essentials git cmake ninja-build mingw-w64 make libglfw3
+```bash
+sudo apt install build-essentials git cmake ninja-build mingw-w64 make libglfw3
+```
 
 2. Clone the Repo
-> git clone https://github.com/VS-dev-cpu/Graphite
+```bash
+git clone https://github.com/VS-dev-cpu/Graphite
+```
 
-3. Build Physics Engine
-> TODO
+> TODO!
 
 #### Linux (Arch Based)
 
 1. Install Build Tools
-> sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
+```bash
+sudo pacman -S git cmake ninja mingw-w64-gcc make glfw-x11
+```
 
 2. Clone the Repo
-> git clone https://github.com/VS-dev-cpu/Graphite
+```bash
+git clone https://github.com/VS-dev-cpu/Graphite
+```
 
-3. Build Physics Engine
-> git clone https://github.com/DanielChappuis/reactphysics3d.git
-
-> cd reactphysics3d
-
-> cmake
-
-> make
-
-> sudo make install
+> TODO!
 
 #### Windows
 
@@ -55,11 +50,11 @@ Coming Later!
 
 #### MacOS
 
-I don't own a Mac Device, but pull requests are welcomed!
+Coming Later!
 
 ### Usage
 
-Coming Soon!
+Coming Later!
 
 ## License
 

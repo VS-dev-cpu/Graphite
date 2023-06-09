@@ -25,25 +25,24 @@ class Engine {
     // Get Key State
     bool key(std::string k);
 
-    // Add Module (Script)
+    // Add Module
     uint add(Module *module);
 
   public:
-    // Main Thread Timing
+    // Timing
     double now, deltaTime;
 
-    // Media Engine
     MediaEngine me;
 
     vec2 cursor;
 
   private:
     // Engine Flags
-    bool running = false;  // is Engine Running ?
-    bool quit = false;     // should quit ?
-    bool drawable = false; // Has New Drawable Content ?
+    bool running = false;
+    bool quit = false;
+    bool drawable = false;
 
-    std::vector<Module *> modules; // Modules
+    std::vector<Module *> modules;
 
   private:
 };
