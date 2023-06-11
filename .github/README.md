@@ -48,10 +48,6 @@ git clone https://github.com/VS-dev-cpu/Graphite
 
 Coming Later!
 
-#### MacOS
-
-Coming Later!
-
 ### Usage
 
 Coming Later!
