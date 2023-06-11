@@ -10,8 +10,6 @@ It will...
 - have cross-platform support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com/))
 - use [Carbon](https://github.com/VS-dev-cpu/Carbon) for Physics
 
-I use [Visual Studio Codium](https://vscodium.com/) with the following extensions: [clangd](https://open-vsx.org/extension/llvm-vs-code-extensions/vscode-clangd), [CMake](https://open-vsx.org/extension/twxs/cmake), [CMake IntelliSense](https://open-vsx.org/extension/KylinIdeTeam/cmake-intellisence), [CMake Tools](https://open-vsx.org/extension/ms-vscode/cmake-tools), [Todo Tree](https://open-vsx.org/vscode/item?itemName=Gruntfuggly.todo-tree)
-
 ## Documentation
 
 ### Setup
