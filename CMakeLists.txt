@@ -15,6 +15,10 @@ set(SOURCES
 
     src/log.cpp
 
+    # Render APIs
+    src/renderAPI/OpenGL/OpenGL.cpp
+    src/renderAPI/Vulkan/Vulkan.cpp
+
     src/GL/glad.c
 )
 

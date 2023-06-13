@@ -1,6 +1,11 @@
 #include <Graphite/core/MediaEngine.h>
-
 #include <Graphite/core/Renderer.h>
+#include <Graphite/renderAPI/RenderAPI.h>
+
+#include <Graphite/renderAPI/OpenGL/OpenGL.h>
+#include <Graphite/renderAPI/Vulkan/Vulkan.h>
+
+#include <stdexcept>
 
 namespace Graphite {
 
@@ -36,12 +41,47 @@ void MediaEngine::add(ACTION action, RenderData data) {
 }
 
 void *MediaEngine::render(void *arg) {
-    // Detach Thread
+    // ---- Detach Thread
     MediaEngine *engine = (MediaEngine *)arg;
     pthread_detach(pthread_self());
 
-    // Initialize Renderer
-    Renderer renderer;
+    // ---- Initialize Render API
+    RenderAPI *render;
+
+    uint32_t api = 0;
+    const uint32_t apiCount = 2;
+
+    while (!render) {
+        try {
+            // Init API (Vulkan > OpenGL)
+            switch (api) {
+            case 0:
+                render = new Vulkan();
+                break;
+
+            case 1:
+                render = new OpenGL();
+                break;
+
+            default:
+                if (api >= apiCount)
+                    api = 0;
+                break;
+            }
+        } catch (const int &error) {
+            delete render;
+            render = nullptr;
+
+            if (api < apiCount)
+                api++;
+            else {
+                // Failed to init API
+            }
+        }
+    }
+
+    // ---- Renderer Initialized; Can Start
+
     // Artifex ax(engine->name, engine->width, engine->height);
     // ax.fullscreen(engine->fullscreen);
 
@@ -131,7 +171,7 @@ void *MediaEngine::render(void *arg) {
         }
 
         // Update Screen
-        engine->running = renderer.update();
+        engine->running = render->update();
         tasks.clear();
 
         if (engine->quit)

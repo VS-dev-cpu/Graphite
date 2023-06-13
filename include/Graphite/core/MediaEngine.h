@@ -46,8 +46,8 @@ typedef std::pair<ACTION, RenderData> RenderTask;
 //  The Media Engine (responsible for Windowing, Rendering and Audio)
 class MediaEngine {
   public:
-    MediaEngine(std::string name = "Graphite::Media", bool fullscreen = true,
-                int width = 720, int height = 480);
+    MediaEngine(std::string name = "Graphite::MediaEngine",
+                bool fullscreen = true, int width = 720, int height = 480);
 
     ~MediaEngine();
 
