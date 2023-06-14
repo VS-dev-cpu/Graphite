@@ -3,10 +3,10 @@
 ## About
 
 It will...
-- use Vulkan
+- use Vulkan and/or OpenGL
 - be modular (everything is scriptable)
 - be light-weight
-- be scriptable in C++ and [Lua](https://www.lua.org/about.html) (and Custom Script Modules)
+- be scriptable in C++, [Lua](https://www.lua.org/about.html) and ***Custom Script Modules***
 - have cross-platform support ([Windows](https://www.mingw-w64.org/), [Linux](https://gcc.gnu.org/), [Web/HTML5](https://emscripten.org/), [Android](https://developer.android.com/))
 - use [Carbon](https://github.com/VS-dev-cpu/Carbon) for Physics
 
