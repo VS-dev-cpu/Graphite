@@ -7,7 +7,7 @@ class OpenGL : public RenderAPI {
     OpenGL();
     ~OpenGL();
 
-    bool update();
+    // bool update();
 
   public:
   private:

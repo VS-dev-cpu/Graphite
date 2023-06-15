@@ -1,5 +1,5 @@
 #include <Graphite/renderAPI/OpenGL/OpenGL.h>
 
-OpenGL::OpenGL() {}
+OpenGL::OpenGL() { throw 1; }
 
 OpenGL::~OpenGL() {}

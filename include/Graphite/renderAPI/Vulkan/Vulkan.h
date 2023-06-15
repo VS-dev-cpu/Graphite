@@ -7,7 +7,7 @@ class Vulkan : public RenderAPI {
     Vulkan();
     ~Vulkan();
 
-    bool update();
+    // bool update();
 
   public:
   private:

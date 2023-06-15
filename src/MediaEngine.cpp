@@ -1,10 +1,9 @@
 #include <Graphite/core/MediaEngine.h>
-#include <Graphite/core/Renderer.h>
-#include <Graphite/renderAPI/RenderAPI.h>
 
 #include <Graphite/renderAPI/OpenGL/OpenGL.h>
 #include <Graphite/renderAPI/Vulkan/Vulkan.h>
 
+#include <exception>
 #include <stdexcept>
 
 namespace Graphite {
@@ -15,7 +14,7 @@ MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
 
     running = true;
 
-    if (pthread_create(&renderThread, nullptr, &render, this))
+    if (pthread_create(&renderThread, nullptr, &renderer, this))
         LOG::ERROR("MediaEngine", "Render Thread Failed");
     else
         LOG::SYSTEM("MediaEngine", "Renderer Initialized");
@@ -40,44 +39,48 @@ void MediaEngine::add(ACTION action, RenderData data) {
     renderQueue.push_back(RenderTask(action, data));
 }
 
-void *MediaEngine::render(void *arg) {
+// Init Graphics API (Vulkan > OpenGL > NONE)
+void MediaEngine::initGraphics(uint32_t api) {
+    const uint32_t apiCount = 2;
+
+    // Attempt to create Graphics API
+    while (!render) {
+        try {
+            switch (api) {
+            case 0: // Init Vulkan
+                render = new Vulkan();
+                break;
+
+            case 1: // Init OpenGL
+                render = new OpenGL();
+                break;
+
+            default: // No API, Error
+                throw std::runtime_error("Failed to init Graphics API");
+                break;
+            }
+        } catch (const int &error) {
+            // destroy bad api
+            delete render;
+            render = nullptr;
+
+            // select next api
+            api++;
+        }
+    }
+}
+
+void *MediaEngine::renderer(void *arg) {
     // ---- Detach Thread
     MediaEngine *engine = (MediaEngine *)arg;
     pthread_detach(pthread_self());
 
     // ---- Initialize Render API
-    RenderAPI *render;
-
-    uint32_t api = 0;
-    const uint32_t apiCount = 2;
-
-    while (!render) {
-        try {
-            // Init API (Vulkan > OpenGL)
-            switch (api) {
-            case 0:
-                render = new Vulkan();
-                break;
-
-            case 1:
-                render = new OpenGL();
-                break;
-
-            default:
-                if (api >= apiCount)
-                    api = 0;
-                break;
-            }
-        } catch (const int &error) {
-            delete render;
-            render = nullptr;
-
-            if (api < apiCount)
-                api++;
-            else {
-                // Failed to init API
-            }
-        }
+    try {
+        engine->initGraphics();
+    } catch (const std::exception &error) {
+        LOG::ERROR("RenderThread", "Failed to init Graphics API");
+        engine->running = false;
     }
 
     // ---- Renderer Initialized; Can Start
@@ -171,7 +174,7 @@ void *MediaEngine::render(void *arg) {
         }
 
         // Update Screen
-        engine->running = render->update();
+        engine->running = engine->render->update();
         tasks.clear();
 
         if (engine->quit)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Graphite/core/log.h>
+#include <Graphite/renderAPI/RenderAPI.h>
 #include <Graphite/types/base.h>
 
 #include <any>
@@ -72,6 +73,9 @@ class MediaEngine {
     std::atomic<bool> running = false;
     std::atomic<bool> quit = false;
 
+    // Rendering API
+    RenderAPI *render = nullptr;
+
   private:
     // Render Thread
     pthread_t renderThread;
@@ -81,7 +85,9 @@ class MediaEngine {
     std::vector<RenderTask> renderQueue;
 
   private:
-    static void *render(void *arg);
+    void initGraphics(uint32_t api = 0);
+
+    static void *renderer(void *arg);
     void add(ACTION action, RenderData data);
 };
 

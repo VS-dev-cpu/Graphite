@@ -1,5 +1,7 @@
 #include <Graphite/renderAPI/Vulkan/Vulkan.h>
 
-Vulkan::Vulkan() {}
+Vulkan::Vulkan() { throw 1; }
 
-Vulkan::~Vulkan() {}
+Vulkan::~Vulkan() {
+    // dosomething
+}

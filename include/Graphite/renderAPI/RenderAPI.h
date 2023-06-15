@@ -4,8 +4,8 @@
 
 class RenderAPI {
   public:
-    RenderAPI() {}
-    ~RenderAPI() {}
+    RenderAPI() { throw 1; }
+    virtual ~RenderAPI() {}
 
     virtual bool update() { return false; }
 

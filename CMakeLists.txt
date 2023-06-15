@@ -11,8 +11,6 @@ set(SOURCES
     src/PhysicsEngine.cpp
     src/ResourceManager.cpp
 
-    src/Renderer.cpp
-
     src/log.cpp
 
     # Render APIs
