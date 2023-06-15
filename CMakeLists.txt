@@ -14,10 +14,14 @@ set(SOURCES
     src/log.cpp
 
     # Graphics
+
+    # - OpenGL
     src/graphics/OpenGL/OpenGL.cpp
+    src/graphics/OpenGL/glad.c
+
+    # - Vulkan
     src/graphics/Vulkan/Vulkan.cpp
 
-    src/GL/glad.c
 )
 
 # Libraries
