@@ -2,10 +2,10 @@
 
 #include <stdint.h>
 
-class RenderAPI {
+class GraphicsAPI {
   public:
-    RenderAPI() { throw 1; }
-    virtual ~RenderAPI() {}
+    GraphicsAPI() { throw 1; }
+    virtual ~GraphicsAPI() {}
 
     virtual bool update() { return false; }
 

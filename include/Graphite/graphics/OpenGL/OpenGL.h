@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Graphite/renderAPI/RenderAPI.h>
+#include <Graphite/graphics/GraphicsAPI.h>
 
-class OpenGL : public RenderAPI {
+class OpenGL : public GraphicsAPI {
   public:
     OpenGL();
     ~OpenGL();

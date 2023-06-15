@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Graphite/renderAPI/RenderAPI.h>
+#include <Graphite/graphics/GraphicsAPI.h>
 
-class Vulkan : public RenderAPI {
+class Vulkan : public GraphicsAPI {
   public:
     Vulkan();
     ~Vulkan();
