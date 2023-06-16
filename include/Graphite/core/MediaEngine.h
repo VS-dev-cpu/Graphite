@@ -23,7 +23,7 @@ class MediaEngine {
 
     ~MediaEngine();
 
-    // Sync With RenderThread & Update RenderQueue
+    // Update Window
     void update();
 
     // Exit Render Loop

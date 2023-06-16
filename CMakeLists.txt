@@ -7,8 +7,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 set(SOURCES
     src/Engine.cpp
 
+    # Core
     src/MediaEngine.cpp
-    src/PhysicsEngine.cpp
     src/ResourceManager.cpp
 
     src/log.cpp
@@ -28,9 +28,9 @@ set(SOURCES
 set(LIBRARIES
     pthread
     glfw
-    #ReactPhysics3D::ReactPhysics3D
 )
 
+# Project (Library)
 project(Graphite VERSION 0.1.0 LANGUAGES C CXX)
 
 add_library(${PROJECT_NAME} ${SOURCES})
