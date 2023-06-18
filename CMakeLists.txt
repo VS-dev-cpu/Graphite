@@ -37,5 +37,7 @@ add_library(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
 target_include_directories(${PROJECT_NAME} PUBLIC "include")
 
+add_subdirectory(Carbon)
+
 # Examples
 add_subdirectory(hello_graphite)
