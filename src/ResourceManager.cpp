@@ -33,11 +33,11 @@ ResourceManager::~ResourceManager() {
     mtl.clear();
 
     // Free Meshes
-    for (auto [name, mesh] : obj) {
-        mesh.vertices.clear();
-        mesh.texcoords.clear();
-        mesh.normals.clear();
-    }
+    // for (auto [name, mesh] : obj) {
+    //     mesh.vertices.clear();
+    //     mesh.texcoords.clear();
+    //     mesh.normals.clear();
+    // }
 
     obj.clear();
 }
@@ -193,15 +193,15 @@ std::vector<std::string> ResourceManager::load_mesh(std::string path) {
                                 }
                 }
 
-                for (int i = 0; i < parts; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        obj[cursor].vertices.push_back(vertices[v[i] + j]);
-                        obj[cursor].normals.push_back(normals[n[i] + j]);
-                        if (j < 3)
-                            obj[cursor].texcoords.push_back(
-                                texcoords[t[i] + j]);
-                    }
-                }
+                // for (int i = 0; i < parts; i++) {
+                //     for (int j = 0; j < 3; j++) {
+                //         obj[cursor].vertices.push_back(vertices[v[i] + j]);
+                //         obj[cursor].normals.push_back(normals[n[i] + j]);
+                //         if (j < 3)
+                //             obj[cursor].texcoords.push_back(
+                //                 texcoords[t[i] + j]);
+                //     }
+                // }
 
             } else {
                 // TODO: Something
