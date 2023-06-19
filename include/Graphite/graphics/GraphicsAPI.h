@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mathutil/common.hpp>
+
 #include <stdint.h>
 
 class GraphicsAPI {

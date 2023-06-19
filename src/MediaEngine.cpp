@@ -15,9 +15,9 @@ MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
     running = true;
 
     if (pthread_create(&renderThread, nullptr, &renderer, this))
-        LOG::ERROR("MediaEngine", "Render Thread Failed to Launch");
+        log_error("MediaEngine", "Render Thread Failed to Launch");
     else
-        LOG::SYSTEM("MediaEngine", "Render Thread Launched");
+        log_system("MediaEngine", "Render Thread Launched");
 }
 
 MediaEngine::~MediaEngine() {
@@ -92,7 +92,7 @@ void *MediaEngine::renderer(void *arg) {
     try {
         engine->initGraphics();
     } catch (const std::exception &error) {
-        LOG::ERROR("RenderThread", "Failed to init Graphics API");
+        log_error("RenderThread", "Failed to init Graphics API");
         engine->running = false;
     }
 

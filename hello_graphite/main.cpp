@@ -7,7 +7,7 @@ class Game : public Graphite::Module {
   public:
     // TODO: Better 2D UI Support
     void init() {
-        Graphite::LOG::DEBUG("GameModule", "Hello");
+        log_debug("GameModule", "Hello");
         // engine->me.add(Graphite::ACTION::PRINT, (std::string) "Hello");
 
         // tex = Graphite::LOAD::Image("res/milk.png");
@@ -37,7 +37,7 @@ int main() {
 
     engine.add(new Game());
 
-    Graphite::LOG::DEBUG("Main", "Hello");
+    log_debug("Main", "Hello");
 
     engine.start();
 

@@ -5,11 +5,11 @@ namespace Graphite {
 // Initialize Engine
 Engine::Engine(std::string name, bool fullscreen, int width, int height)
     : me(name, fullscreen, width, height) {
-    LOG::SYSTEM("GameEngine", "Initialized");
+    log_system("GameEngine", "Initialized");
 }
 
 // Destroy Engine
-Engine::~Engine() { LOG::SYSTEM("GameEngine", "Destroyed"); }
+Engine::~Engine() { log_system("GameEngine", "Destroyed"); }
 
 // Start Engine
 void Engine::start() {
@@ -17,7 +17,7 @@ void Engine::start() {
     for (Module *module : modules)
         module->init();
 
-    LOG::SYSTEM("GameEngine", "Started Successfully");
+    log_system("GameEngine", "Started Successfully");
 
     // Main Loop
     double past = now = time();

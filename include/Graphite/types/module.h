@@ -1,6 +1,5 @@
 #pragma once
 
-#include <Graphite/core/log.h>
 #include <string>
 
 namespace Graphite {

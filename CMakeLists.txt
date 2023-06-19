@@ -11,8 +11,6 @@ set(SOURCES
     src/MediaEngine.cpp
     src/ResourceManager.cpp
 
-    src/log.cpp
-
     # Graphics
 
     # - OpenGL
