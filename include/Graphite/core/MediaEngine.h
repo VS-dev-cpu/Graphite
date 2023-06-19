@@ -8,6 +8,7 @@
 #include <any>
 #include <atomic>
 #include <pthread.h>
+#include <string>
 #include <tuple>
 #include <variant>
 #include <vector>
