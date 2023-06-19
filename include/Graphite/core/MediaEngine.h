@@ -1,7 +1,5 @@
 #pragma once
 
-#include <Graphite/types/base.h>
-
 #include <Graphite/audio/AudioAPI.h>
 #include <Graphite/graphics/GraphicsAPI.h>
 
