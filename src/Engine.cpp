@@ -1,23 +1,18 @@
-#include <Graphite/Engine.h>
+#include <Graphite/Engine.hpp>
 
 namespace Graphite {
 
 // Initialize Engine
-Engine::Engine(std::string name, bool fullscreen, int width, int height)
-    : me(name, fullscreen, width, height) {
-    log_system("GameEngine", "Initialized");
-}
+Engine::Engine(std::string name, bool fullscreen, int width, int height) {}
 
 // Destroy Engine
-Engine::~Engine() { log_system("GameEngine", "Destroyed"); }
+Engine::~Engine() {}
 
 // Start Engine
 void Engine::start() {
     // Initialize Modules
     for (Module *module : modules)
         module->init();
-
-    log_system("GameEngine", "Started Successfully");
 
     // Main Loop
     double past = now = time();

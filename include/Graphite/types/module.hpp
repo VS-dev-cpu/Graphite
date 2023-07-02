@@ -7,7 +7,7 @@ namespace Graphite {
 // Engine Pre-Definition
 class Engine;
 
-// A Module (aka Extension/Addon)
+// A Game Engine Module
 class Module {
   public:
     // ---- Variables ----
