@@ -8,18 +8,12 @@ set(SOURCES
     src/Engine.cpp
 
     # Core
-    src/MediaEngine.cpp
-    src/ResourceManager.cpp
+    src/core/MediaEngine.cpp
+    src/core/ResourceManager.cpp
 
     # Graphics
-
-    # - OpenGL
-    src/graphics/OpenGL/OpenGL.cpp
-    src/graphics/OpenGL/glad.c
-
-    # - Vulkan
-    src/graphics/Vulkan/Vulkan.cpp
-
+    src/graphics/Graphics.cpp
+    src/graphics/glad.c
 )
 
 # Libraries

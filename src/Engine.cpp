@@ -1,4 +1,4 @@
-#include <Graphite/Engine.h>
+#include <Graphite/Engine.hpp>
 
 namespace Graphite {
 

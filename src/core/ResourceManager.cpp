@@ -1,7 +1,7 @@
-#include <Graphite/core/ResourceManager.h>
+#include <Graphite/core/ResourceManager.hpp>
 
 #define STB_IMAGE_IMPLEMENTATION
-#include <Graphite/core/stb_image.h>
+#include <Graphite/utility/stb_image.h>
 
 #include <cstring>
 #include <fstream>

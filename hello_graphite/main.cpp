@@ -1,6 +1,6 @@
-#include <Graphite/Engine.h>
+#include <Graphite/Engine.hpp>
 
-#include <Graphite/core/ResourceManager.h>
+#include <Graphite/core/ResourceManager.hpp>
 
 using namespace std;
 

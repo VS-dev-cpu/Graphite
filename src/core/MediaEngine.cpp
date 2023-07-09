@@ -1,12 +1,11 @@
-#include <Graphite/core/MediaEngine.h>
+#include <Graphite/core/MediaEngine.hpp>
 
-#include <Graphite/graphics/OpenGL/OpenGL.h>
-#include <Graphite/graphics/Vulkan/Vulkan.h>
+#include <Graphite/graphics/Graphics.hpp>
 
 #include <exception>
 #include <stdexcept>
 
-namespace Graphite {
+using namespace Graphite;
 
 MediaEngine::MediaEngine(std::string name, bool fullscreen, int width,
                          int height)
@@ -33,68 +32,18 @@ void MediaEngine::update() {
 
 void MediaEngine::exit() { quit = true; }
 
-void MediaEngine::initGraphics(uint32_t api) {
-    const uint32_t apiCount = 2;
-
-    while (!render) {
-        try {
-            switch (api) {
-            case 0: // Init Vulkan
-                render = new Vulkan();
-                break;
-
-            case 1: // Init OpenGL
-                render = new OpenGL();
-                break;
-
-            default: // No API, Error
-                throw std::runtime_error("Failed to init Graphics API");
-                break;
-            }
-        } catch (const int &error) {
-            // destroy bad api
-            delete render;
-            render = nullptr;
-
-            // select next api
-            api++;
-        }
-    }
-}
-
-void MediaEngine::initAudio(uint32_t api) {
-    const uint32_t apiCount = 2;
-
-    while (!mix) {
-        try {
-            switch (api) {
-            default: // No API, Error
-                throw std::runtime_error("Failed to init Audio API");
-                break;
-            }
-        } catch (const int &error) {
-            // destroy bad api
-            delete mix;
-            mix = nullptr;
-
-            // select next api
-            api++;
-        }
-    }
-}
-
 void *MediaEngine::renderer(void *arg) {
     // ---- Detach Thread
     MediaEngine *engine = (MediaEngine *)arg;
     pthread_detach(pthread_self());
 
     // ---- Initialize Render API
-    try {
-        engine->initGraphics();
-    } catch (const std::exception &error) {
-        log_error("RenderThread", "Failed to init Graphics API");
-        engine->running = false;
-    }
+    // try {
+    //     engine->initGraphics();
+    // } catch (const std::exception &error) {
+    //     log_error("RenderThread", "Failed to init Graphics API");
+    //     engine->running = false;
+    // }
 
     // ---- Renderer Initialized; Can Start
 
@@ -188,7 +137,7 @@ void *MediaEngine::renderer(void *arg) {
         //}
 
         // Update Screen
-        engine->running = engine->render->update();
+        engine->running = 0; // engine->render->update();
         // tasks.clear();
 
         if (engine->quit)
@@ -199,5 +148,3 @@ void *MediaEngine::renderer(void *arg) {
     pthread_exit(nullptr);
     return nullptr;
 }
-
-} // namespace Graphite

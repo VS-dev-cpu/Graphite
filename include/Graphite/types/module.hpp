@@ -23,8 +23,6 @@ class Module {
     // ---- Updates ----
 
     virtual void update(float deltaTime){}; // called on update
-    virtual void
-    fixedUpdate(double deltaTime){}; // called on in every 16 ms (60 fps)
 
     // ---- Event Callbacks ----
 

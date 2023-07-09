@@ -1,8 +1,5 @@
 #pragma once
 
-#include <Graphite/audio/AudioAPI.h>
-#include <Graphite/graphics/GraphicsAPI.h>
-
 #include <mathutil/common.hpp>
 
 #include <any>
@@ -44,12 +41,6 @@ class MediaEngine {
     std::atomic<bool> running = false;
     std::atomic<bool> quit = false;
 
-    // Graphics API
-    GraphicsAPI *render = nullptr;
-
-    // Audio API
-    AudioAPI *mix = nullptr;
-
   private:
     // ---- Graphics
 
@@ -59,12 +50,6 @@ class MediaEngine {
     // ---- Audio
 
   private:
-    // Initialize Graphics API
-    void initGraphics(uint32_t api = 0);
-
-    // Initialize Audio API
-    void initAudio(uint32_t api = 0);
-
     // Render Thread Function
     static void *renderer(void *arg);
 };

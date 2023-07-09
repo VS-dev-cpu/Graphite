@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Graphite/core/MediaEngine.h>
+#include <Graphite/core/MediaEngine.hpp>
 
-#include <Graphite/types/module.h>
+#include <Graphite/types/module.hpp>
 
 #include <Carbon/Carbon.hpp>
 
@@ -22,9 +22,6 @@ class Engine {
 
     // Start Main Game Loop
     void start();
-
-    // Get Key State
-    bool key(std::string k);
 
     // Add Module
     uint add(Module *module);
